@@ -35,12 +35,14 @@ namespace oczko {
 			}
 		}
 
+	protected:
+
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
 		System::ComponentModel::Container ^components;
-
+		void MenuForm_Load(System::Object^ sender, System::EventArgs^ e);
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Required method for Designer support - do not modify
@@ -48,6 +50,7 @@ namespace oczko {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MenuForm::typeid));
 			this->SuspendLayout();
 			// 
 			// MenuForm
@@ -58,6 +61,7 @@ namespace oczko {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MenuForm";
 			this->Text = L"MenuForm";
+			this->Load += gcnew System::EventHandler(this, &MenuForm::MenuForm_Load);
 			this->ResumeLayout(false);
 
 		}
