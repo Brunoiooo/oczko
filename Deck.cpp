@@ -2,21 +2,7 @@
 #include <stdexcept>
 
 namespace Deck {
-	Deck::Deck() {
-		this->Cards = gcnew List<Card::Card^>();
-
-		for (unsigned int i = 1; i <= 4; i++)
-		{
-			for (unsigned int x = 2; x <= 11; x++) {
-				this->Cards->Add(gcnew Card::Card(i, x));
-			}
-		}
-	}
-
-	Deck::~Deck() {
-		this->Cards->Clear();
-	}
-
+	//Methods
 	Card::Card^ Deck::Draw() {
 		if (this->Cards->Count < 1) throw std::runtime_error("Desk is empty.");
 
@@ -30,5 +16,17 @@ namespace Deck {
 
 	unsigned int Deck::GetCountOfCards() {
 		return this->Cards->Count;
+	}
+
+	//Constructors
+	Deck::Deck() {
+		this->Cards = gcnew List<Card::Card^>();
+
+		for (unsigned int i = 1; i <= 4; i++)
+		{
+			for (unsigned int x = 2; x <= 11; x++) {
+				this->Cards->Add(gcnew Card::Card(i, x));
+			}
+		}
 	}
 }
