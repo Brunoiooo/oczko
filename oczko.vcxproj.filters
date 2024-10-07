@@ -16,17 +16,62 @@
     <Filter Include="Pliki zasobów\icons">
       <UniqueIdentifier>{6fdbdf66-13f9-43f3-a458-08fd1372a960}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{ee87a97f-a10b-4945-bbb2-6d917966fe70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Deck">
+      <UniqueIdentifier>{086874a6-7aca-4619-89e5-77664622f293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Card">
+      <UniqueIdentifier>{2bcbb80f-6f1f-498e-93cd-dc972e464a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player">
+      <UniqueIdentifier>{9efaf726-cf01-412d-a4f1-382be5a0fe25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Croupier">
+      <UniqueIdentifier>{362b2f22-e07d-4383-8f6b-854c50678fe0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Game\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>Game\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Croupier.cpp">
+      <Filter>Game\Croupier</Filter>
+    </ClCompile>
     <ClCompile Include="MenuForm.cpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClCompile>
+    <ClCompile Include="GameForm.cpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Deck.h">
+      <Filter>Game\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Game\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Croupier.h">
+      <Filter>Game\Croupier</Filter>
+    </ClInclude>
     <ClInclude Include="MenuForm.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="GameForm.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

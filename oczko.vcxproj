@@ -120,21 +120,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Croupier.cpp" />
+    <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="GameForm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuForm.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Card.h" />
+    <ClInclude Include="Croupier.h" />
+    <ClInclude Include="Deck.h" />
+    <ClInclude Include="GameForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MenuForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MenuForm.resx">
-      <DependentUpon>MenuForm.h</DependentUpon>
-    </EmbeddedResource>
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GameForm.resx">
+      <DependentUpon>GameForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuForm.resx">
+      <DependentUpon>MenuForm.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
