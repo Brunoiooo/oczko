@@ -3,33 +3,43 @@
 
 namespace Player {
 	//Methods
-	void Player::SetBet(float bet) {
-		if (bet <= 0) throw std::runtime_error("Bet has to be bigger than 0.");
+	float Player::GetBet() {
+		return Bet;
+	}
 
-		this->Bet = bet;
+	float Player::GetMultiplier() {
+		return Multiplier;
+	}
+
+	void Player::SetMultiplier(float multiplier) {
+		SetMultiplier(multiplier);
 	}
 
 	List<Card::Card^>^ Player::GetCards() {
-		return this->Cards;
+		return Cards;
 	}
 
 	//Constructors
 	Player::Player(float bet, Card::Card^ firstCard) {
 		if (bet <= 0) throw std::runtime_error("Bet has to be bigger than 0.");
 
-		this->Bet = bet;
+		Bet = bet;
 
-		this->Cards = gcnew List<Card::Card^>();
-		this->Cards->Add(firstCard);
+		Cards = gcnew List<Card::Card^>();
+		Cards->Add(firstCard);
+
+		Multiplier = 1;
 	}
 
 	Player::Player(float bet, Card::Card^ firstCard, Card::Card^ secondCard) {
 		if (bet <= 0) throw std::runtime_error("Bet has to be bigger than 0.");
 
-		this->Bet = bet;
+		Bet = bet;
 
-		this->Cards = gcnew List<Card::Card^>();
-		this->Cards->Add(firstCard);
-		this->Cards->Add(secondCard);
+		Cards = gcnew List<Card::Card^>();
+		Cards->Add(firstCard);
+		Cards->Add(secondCard);
+
+		Multiplier = 1;
 	}
 }
