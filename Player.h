@@ -10,10 +10,13 @@ namespace Player {
 	private:
 		List<Card::Card^>^ Cards;
 		float Bet;
+		float Multiplier;
 
 		//Methods
 	public:
-		void SetBet(float bet);
+		float GetBet();
+		float GetMultiplier();
+		void SetMultiplier(float multiplier);
 		List<Card::Card^>^ GetCards();
 
 		//Constructors
