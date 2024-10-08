@@ -60,6 +60,7 @@ namespace oczko {
 		void UpdatePlayerHandListBox();
 		void UpdateCroupierHandListBox();
 		void UpdateHitButton();
+		void UpdatePlayerScoreLabel();
 
 		//Constructor
 	public:
