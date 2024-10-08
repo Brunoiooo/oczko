@@ -58,6 +58,7 @@ namespace oczko {
 		void UpdateCardCountLabel();
 		void UpdatePlayerHandListBox();
 		void UpdateCroupierHandListBox();
+		void UpdateHitButton();
 
 		//Constructor
 	public:

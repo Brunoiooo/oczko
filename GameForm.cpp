@@ -27,6 +27,7 @@ namespace oczko {
 		UpdateCardCountLabel();
 		UpdatePlayerHandListBox();
 		UpdateCroupierHandListBox();
+		UpdateHitButton();
 		return card;
 	}
 
@@ -66,6 +67,7 @@ namespace oczko {
 		UpdateBetLabel();
 		UpdateMultiplierLabel();
 		UpdatePlayerHandListBox();
+		UpdateHitButton();
 	}
 
 	//Methods
@@ -196,5 +198,17 @@ namespace oczko {
 
 			CoupierHandListBox->Show();
 		}
+	}
+
+	void GameForm::UpdateHitButton() {
+		int activeHand = GetActiveHand();
+		List<Player::Player^>^ players = GetPlayers();
+
+		if (players->Count < 1 || 
+			activeHand < 0 || 
+			players->Count <= activeHand || 
+			players[activeHand]->GetScore() >= 21) 
+				HitButton->Hide();
+		else HitButton->Show();
 	}
 }
