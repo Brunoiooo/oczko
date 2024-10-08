@@ -37,6 +37,7 @@ namespace oczko {
 		void AddPlayer(Player::Player^ player);
 		void ClearPlayer();
 		void AddPlayerCard();
+		void StandPlayer();
 
 		Croupier::Croupier^ GetCroupier();
 		void SetCroupier(Croupier::Croupier^ croupier);
@@ -213,6 +214,7 @@ namespace oczko {
 			this->StandButton->TabIndex = 6;
 			this->StandButton->Text = L"Stand";
 			this->StandButton->UseVisualStyleBackColor = true;
+			this->StandButton->Click += gcnew System::EventHandler(this, &GameForm::StandButton_Click);
 			// 
 			// DoubleButton
 			// 
@@ -334,6 +336,10 @@ namespace oczko {
 
 	private: System::Void HitButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		AddPlayerCard();
+	}
+
+	private: System::Void StandButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		StandPlayer();
 	}
 };
 }

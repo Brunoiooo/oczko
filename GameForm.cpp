@@ -60,6 +60,14 @@ namespace oczko {
 		UpdateStandButton();
 	}
 
+	void GameForm::StandPlayer()
+	{
+		GetPlayers()[GetActiveHand()]
+			->SetStand();
+		UpdateHitButton();
+		UpdateStandButton();
+	}
+
 	Croupier::Croupier^ GameForm::GetCroupier() {
 		return Croupier;
 	}
@@ -220,7 +228,8 @@ namespace oczko {
 		if (players->Count < 1 || 
 			activeHand < 0 || 
 			players->Count <= activeHand || 
-			players[activeHand]->GetScore() >= 21) 
+			players[activeHand]->GetScore() >= 21 ||
+			players[activeHand]->GetStand())
 				HitButton->Hide();
 		else HitButton->Show();
 	}
@@ -246,6 +255,8 @@ namespace oczko {
 		if (players->Count < 1 ||
 			activeHand < 0 ||
 			players->Count <= activeHand)
+			StandButton->Hide();
+		else if(players[activeHand]->GetStand())
 			StandButton->Hide();
 		else if(players[activeHand]->GetCards()->Count == 2 && 
 			players[activeHand]->GetScore() == 22) 
