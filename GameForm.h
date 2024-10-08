@@ -36,6 +36,7 @@ namespace oczko {
 		List<Player::Player^>^ GetPlayers();
 		void AddPlayer(Player::Player^ player);
 		void ClearPlayer();
+		void AddPlayerCard();
 
 		Croupier::Croupier^ GetCroupier();
 		void SetCroupier(Croupier::Croupier^ croupier);
@@ -297,8 +298,13 @@ namespace oczko {
 	private: System::Void NewBetButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		StartNewGame();
 	}
+
 	private: System::Void HandsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 		SetActiveHand(PlayerHandListBox->SelectedIndex);
+	}
+
+	private: System::Void HitButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		AddPlayerCard();
 	}
 };
 }

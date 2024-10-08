@@ -49,6 +49,15 @@ namespace oczko {
 		UpdateNewBetTextBox();
 	}
 
+	void GameForm::AddPlayerCard()
+	{
+		GetPlayers()[GetActiveHand()]
+			->GetCards()
+			->Add(Draw());
+		UpdatePlayerHandListBox();
+		UpdateHitButton();
+	}
+
 	Croupier::Croupier^ GameForm::GetCroupier() {
 		return Croupier;
 	}
