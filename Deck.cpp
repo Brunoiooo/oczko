@@ -6,8 +6,7 @@ namespace Deck {
 	Card::Card^ Deck::Draw() {
 		if (Cards->Count < 1) throw std::runtime_error("Desk is empty.");
 
-		System::Random^ random = gcnew System::Random();
-		int index = random->Next(0, Cards->Count - 1);
+		int index = Random->Next(0, Cards->Count - 1);
 
 		Card::Card^ card = Cards[index];
 		Cards->Remove(card);
@@ -21,6 +20,8 @@ namespace Deck {
 
 	//Constructors
 	Deck::Deck() {
+		Random = gcnew System::Random();
+
 		Cards = gcnew List<Card::Card^>();
 
 		for (unsigned int i = 1; i <= 4; i++)

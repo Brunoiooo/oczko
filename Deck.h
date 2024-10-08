@@ -9,6 +9,7 @@ namespace Deck {
 		//Models
 	private:
 		List<Card::Card^>^ Cards;
+		System::Random^ Random;
 
 		//Methods
 	public:
