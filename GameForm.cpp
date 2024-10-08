@@ -139,7 +139,7 @@ namespace oczko {
 		List<Player::Player^>^ players = GetPlayers();
 		int activeHand = GetActiveHand();
 		
-		if (ActiveHand < 0 || players->Count <= activeHand) MultiplierLabel->Hide();
+		if (activeHand < 0 || players->Count <= activeHand) MultiplierLabel->Hide();
 		else {
 			Player::Player^ player = players[activeHand];
 
@@ -150,6 +150,8 @@ namespace oczko {
 
 	void GameForm::UpdateCardCountLabel() {
 		List<Player::Player^>^ players = GetPlayers();
+
+		int activeHand = GetActiveHand();
 
 		if (players->Count < 1) CardCountLabel->Hide();
 		else {
