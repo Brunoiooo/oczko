@@ -57,6 +57,7 @@ namespace oczko {
 		UpdatePlayerHandListBox();
 		UpdateHitButton();
 		UpdatePlayerScoreLabel();
+		UpdateStandButton();
 	}
 
 	Croupier::Croupier^ GameForm::GetCroupier() {
@@ -79,6 +80,7 @@ namespace oczko {
 		UpdatePlayerHandListBox();
 		UpdateHitButton();
 		UpdatePlayerScoreLabel();
+		UpdateStandButton();
 	}
 
 	//Methods
@@ -235,5 +237,21 @@ namespace oczko {
 			PlayerScoreLabel->Text = "Score: " + players[activeHand]->GetScore().ToString();
 			PlayerScoreLabel->Show();
 		}
+	}
+	void GameForm::UpdateStandButton()
+	{
+		int activeHand = GetActiveHand();
+		List<Player::Player^>^ players = GetPlayers();
+
+		if (players->Count < 1 ||
+			activeHand < 0 ||
+			players->Count <= activeHand)
+			StandButton->Hide();
+		else if(players[activeHand]->GetCards()->Count == 2 && 
+			players[activeHand]->GetScore() == 22) 
+			StandButton->Show();
+		else if(players[activeHand]->GetScore() <= 21) 
+			StandButton->Show();
+		else StandButton->Hide();
 	}
 }
