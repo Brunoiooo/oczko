@@ -88,6 +88,8 @@ namespace oczko {
 			DoubleButton->Hide();
 			SplitButton->Hide();
 			SplitBoxListBox->Hide();
+			PlayerScoreLabel->Hide();
+			CroupierScoreLabel->Hide();
 		}
 
 		//Destructor
@@ -116,6 +118,8 @@ namespace oczko {
 		System::Windows::Forms::Label^ CardCountLabel;
 		System::Windows::Forms::ListBox^ SplitBoxListBox;
 		System::Windows::Forms::Label^ MoneyLabel;
+		System::Windows::Forms::Label^ PlayerScoreLabel;
+		System::Windows::Forms::Label^ CroupierScoreLabel;
 
 		//Components container
 	private:
@@ -139,6 +143,8 @@ namespace oczko {
 			this->CardCountLabel = (gcnew System::Windows::Forms::Label());
 			this->SplitBoxListBox = (gcnew System::Windows::Forms::ListBox());
 			this->MoneyLabel = (gcnew System::Windows::Forms::Label());
+			this->PlayerScoreLabel = (gcnew System::Windows::Forms::Label());
+			this->CroupierScoreLabel = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// HandsListBox
@@ -195,6 +201,7 @@ namespace oczko {
 			this->HitButton->TabIndex = 5;
 			this->HitButton->Text = L"Hit";
 			this->HitButton->UseVisualStyleBackColor = true;
+			this->HitButton->Click += gcnew System::EventHandler(this, &GameForm::HitButton_Click);
 			// 
 			// StandButton
 			// 
@@ -269,25 +276,45 @@ namespace oczko {
 			this->MoneyLabel->TabIndex = 13;
 			this->MoneyLabel->Text = L"Money";
 			// 
+			// PlayerScoreLabel
+			// 
+			this->PlayerScoreLabel->AutoSize = true;
+			this->PlayerScoreLabel->Location = System::Drawing::Point(1450, 195);
+			this->PlayerScoreLabel->Name = L"PlayerScoreLabel";
+			this->PlayerScoreLabel->Size = System::Drawing::Size(82, 16);
+			this->PlayerScoreLabel->TabIndex = 14;
+			this->PlayerScoreLabel->Text = L"PlayerScore";
+			// 
+			// CroupierScoreLabel
+			// 
+			this->CroupierScoreLabel->AutoSize = true;
+			this->CroupierScoreLabel->Location = System::Drawing::Point(1614, 195);
+			this->CroupierScoreLabel->Name = L"CroupierScoreLabel";
+			this->CroupierScoreLabel->Size = System::Drawing::Size(118, 20);
+			this->CroupierScoreLabel->TabIndex = 15;
+			this->CroupierScoreLabel->Text = L"CroupierScore";
+			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1787, 777);
-			this->Controls->Add(MoneyLabel);
-			this->Controls->Add(SplitBoxListBox);
-			this->Controls->Add(CardCountLabel);
-			this->Controls->Add(MultiplierLabel);
-			this->Controls->Add(BetLabel);
-			this->Controls->Add(SplitButton);
-			this->Controls->Add(DoubleButton);
-			this->Controls->Add(StandButton);
-			this->Controls->Add(HitButton);
-			this->Controls->Add(PlayerHandListBox);
-			this->Controls->Add(CoupierHandListBox);
-			this->Controls->Add(NewBetButton);
-			this->Controls->Add(BetTextBox);
-			this->Controls->Add(HandsListBox);
+			this->Controls->Add(this->CroupierScoreLabel);
+			this->Controls->Add(this->PlayerScoreLabel);
+			this->Controls->Add(this->MoneyLabel);
+			this->Controls->Add(this->SplitBoxListBox);
+			this->Controls->Add(this->CardCountLabel);
+			this->Controls->Add(this->MultiplierLabel);
+			this->Controls->Add(this->BetLabel);
+			this->Controls->Add(this->SplitButton);
+			this->Controls->Add(this->DoubleButton);
+			this->Controls->Add(this->StandButton);
+			this->Controls->Add(this->HitButton);
+			this->Controls->Add(this->PlayerHandListBox);
+			this->Controls->Add(this->CoupierHandListBox);
+			this->Controls->Add(this->NewBetButton);
+			this->Controls->Add(this->BetTextBox);
+			this->Controls->Add(this->HandsListBox);
 			this->Name = L"GameForm";
 			this->Text = L"GameForm";
 			this->ResumeLayout(false);
