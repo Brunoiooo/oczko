@@ -4,13 +4,13 @@
 namespace Croupier {
 	//Methods
 	List<Card::Card^>^ Croupier::GetCards() {
-		return this->Cards;
+		return Cards;
 	}
 
 	//Constructors
 	Croupier::Croupier(Card::Card^ firstCard, Card::Card^ secondCard) {
-		this->Cards = gcnew List<Card::Card^>();
-		this->Cards->Add(firstCard);
-		this->Cards->Add(secondCard);
+		Cards = gcnew List<Card::Card^>();
+		Cards->Add(firstCard);
+		Cards->Add(secondCard);
 	}
 }
