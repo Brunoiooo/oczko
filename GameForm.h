@@ -57,6 +57,7 @@ namespace oczko {
 		void UpdateMultiplierLabel();
 		void UpdateCardCountLabel();
 		void UpdatePlayerHandListBox();
+		void UpdateCroupierHandListBox();
 
 		//Constructor
 	public:
@@ -69,9 +70,11 @@ namespace oczko {
 			if (money <= 0) throw gcnew System::Exception("Start money has to be bigger than 0.");
 
 			Money = money;
+			Deck = nullptr;
 			Players = gcnew List<Player::Player^>();
-
 			ActiveHand = -1;
+			Croupier = nullptr;
+
 			MoneyLabel->Text = money.ToString();
 			MultiplierLabel->Hide();
 			BetLabel->Hide();
