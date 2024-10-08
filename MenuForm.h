@@ -44,39 +44,39 @@ namespace oczko {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
-			StartButton = (gcnew System::Windows::Forms::Button());
-			StartMoneyTextBox = (gcnew System::Windows::Forms::TextBox());
-			SuspendLayout();
+			this->StartButton = (gcnew System::Windows::Forms::Button());
+			this->StartMoneyTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->SuspendLayout();
 			// 
 			// StartButton
 			// 
-			StartButton->Location = System::Drawing::Point(723, 577);
-			StartButton->Name = L"StartButton";
-			StartButton->Size = System::Drawing::Size(240, 101);
-			StartButton->TabIndex = 0;
-			StartButton->Text = L"Start";
-			StartButton->UseVisualStyleBackColor = true;
-			StartButton->Click += gcnew System::EventHandler(this, &MenuForm::StartButton_Click);
+			this->StartButton->Location = System::Drawing::Point(723, 577);
+			this->StartButton->Name = L"StartButton";
+			this->StartButton->Size = System::Drawing::Size(240, 101);
+			this->StartButton->TabIndex = 0;
+			this->StartButton->Text = L"Start";
+			this->StartButton->UseVisualStyleBackColor = true;
+			this->StartButton->Click += gcnew System::EventHandler(this, &MenuForm::StartButton_Click);
 			// 
 			// StartMoneyTextBox
 			// 
-			StartMoneyTextBox->Location = System::Drawing::Point(723, 209);
-			StartMoneyTextBox->Name = L"StartMoneyTextBox";
-			StartMoneyTextBox->Size = System::Drawing::Size(216, 22);
-			StartMoneyTextBox->TabIndex = 1;
-			StartMoneyTextBox->Text = L"1000";
+			this->StartMoneyTextBox->Location = System::Drawing::Point(723, 209);
+			this->StartMoneyTextBox->Name = L"StartMoneyTextBox";
+			this->StartMoneyTextBox->Size = System::Drawing::Size(216, 22);
+			this->StartMoneyTextBox->TabIndex = 1;
+			this->StartMoneyTextBox->Text = L"1000";
 			// 
 			// MenuForm
 			// 
-			AutoScaleDimensions = System::Drawing::SizeF(8, 16);
-			AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			ClientSize = System::Drawing::Size(1742, 833);
-			Controls->Add(StartMoneyTextBox);
-			Controls->Add(StartButton);
-			Name = L"MenuForm";
-			Text = L"MenuForm";
-			ResumeLayout(false);
-			PerformLayout();
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(1742, 833);
+			this->Controls->Add(StartMoneyTextBox);
+			this->Controls->Add(StartButton);
+			this->Name = L"MenuForm";
+			this->Text = L"MenuForm";
+			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
