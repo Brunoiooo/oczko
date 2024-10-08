@@ -30,6 +30,16 @@ namespace Player {
 		return score;
 	}
 
+	bool Player::GetStand()
+	{
+		return Stand;
+	}
+
+	void Player::SetStand()
+	{
+		Stand = true;
+	}
+
 	//Constructors
 	Player::Player(float bet, Card::Card^ firstCard) {
 		if (bet <= 0) throw std::runtime_error("Bet has to be bigger than 0.");
@@ -40,6 +50,8 @@ namespace Player {
 		Cards->Add(firstCard);
 
 		Multiplier = 1;
+
+		Stand = false;
 	}
 
 	Player::Player(float bet, Card::Card^ firstCard, Card::Card^ secondCard) {
@@ -52,5 +64,7 @@ namespace Player {
 		Cards->Add(secondCard);
 
 		Multiplier = 1;
+
+		Stand = false;
 	}
 }

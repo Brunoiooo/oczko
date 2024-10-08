@@ -11,6 +11,7 @@ namespace Player {
 		List<Card::Card^>^ Cards;
 		float Bet;
 		float Multiplier;
+		bool Stand;
 
 		//Methods
 	public:
@@ -19,7 +20,10 @@ namespace Player {
 		void SetMultiplier(float multiplier);
 		List<Card::Card^>^ GetCards();
 		int GetScore();
-
+		bool GetStand();
+		void SetStand();
+		
+			
 		//Constructors
 	public:
 		Player(float bet, Card::Card^ firstCard);
