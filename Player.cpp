@@ -19,6 +19,17 @@ namespace Player {
 		return Cards;
 	}
 
+	int Player::GetScore()
+	{
+		List<Card::Card^>^ cards = GetCards();
+
+		int score = 0;
+		for (int i = 0; i < cards->Count; i++)
+			score += cards[i]->GetValue();
+
+		return score;
+	}
+
 	//Constructors
 	Player::Player(float bet, Card::Card^ firstCard) {
 		if (bet <= 0) throw std::runtime_error("Bet has to be bigger than 0.");

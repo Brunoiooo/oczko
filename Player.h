@@ -18,6 +18,7 @@ namespace Player {
 		float GetMultiplier();
 		void SetMultiplier(float multiplier);
 		List<Card::Card^>^ GetCards();
+		int GetScore();
 
 		//Constructors
 	public:
