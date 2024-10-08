@@ -76,6 +76,13 @@ namespace oczko {
 			MultiplierLabel->Hide();
 			BetLabel->Hide();
 			CardCountLabel->Hide();
+			PlayerHandListBox->Hide();
+			CoupierHandListBox->Hide();
+			HitButton->Hide();
+			StandButton->Hide();
+			DoubleButton->Hide();
+			SplitButton->Hide();
+			SplitBoxListBox->Hide();
 		}
 
 		//Destructor
