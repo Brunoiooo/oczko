@@ -163,14 +163,21 @@ namespace oczko {
 	}
 
 	void GameForm::UpdatePlayerHandListBox() {
+		PlayerHandListBox->Items->Clear();
+
 		List<Player::Player^>^ players = GetPlayers();
 
-		if (players->Count < 1) CardCountLabel->Hide();
-		else {
-			Deck::Deck^ deck = GetDeck();
+		int activeHand = GetActiveHand();
 
-			CardCountLabel->Text = deck->GetCountOfCards().ToString();
-			CardCountLabel->Show();
+		if (players->Count < 1 || activeHand < 0 || players->Count <= activeHand) PlayerHandListBox->Hide();
+		else {
+			Player::Player^ player = players[activeHand];
+
+			List<Card::Card^>^ cards = player->GetCards();
+
+			for(int i = 0; i < cards->Count; i++)
+			PlayerHandListBox->Items->Add(cards[i]->GetColor() + "|" + cards[i]->GetValue());
+			PlayerHandListBox->Show();
 		}
 	}
 }
