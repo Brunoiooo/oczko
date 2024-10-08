@@ -22,8 +22,7 @@ namespace oczko {
 		Deck::Deck^ Deck;
 		List<Player::Player^>^ Players;
 		int ActiveHand;
-	private: System::Windows::Forms::Label^ MoneyLabel;
-		   Croupier::Croupier^ Croupier;
+		Croupier::Croupier^ Croupier;
 
 		//Getters and Setters
 	private:
@@ -104,6 +103,7 @@ namespace oczko {
 		System::Windows::Forms::Label^ MultiplierLabel;
 		System::Windows::Forms::Label^ CardCountLabel;
 		System::Windows::Forms::ListBox^ SplitBoxListBox;
+		System::Windows::Forms::Label^ MoneyLabel;
 
 		//Components container
 	private:
