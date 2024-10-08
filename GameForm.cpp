@@ -20,13 +20,13 @@ namespace oczko {
 	void GameForm::SetDeck(Deck::Deck^ deck) {
 		Deck = deck;
 		UpdateCardCountLabel();
-		UpdatePlayerHandListBox();
 	}
 
 	Card::Card^ GameForm::Draw() {
 		Card::Card^ card = GetDeck()->Draw();
 		UpdateCardCountLabel();
 		UpdatePlayerHandListBox();
+		UpdateCroupierHandListBox();
 		return card;
 	}
 
@@ -39,7 +39,6 @@ namespace oczko {
 		UpdateBetButtor();
 		UpdateHandsListBox();
 		UpdateNewBetTextBox();
-		
 	}
 
 	void GameForm::ClearPlayer() {
@@ -55,6 +54,7 @@ namespace oczko {
 
 	void GameForm::SetCroupier(Croupier::Croupier^ croupier) {
 		Croupier = croupier;
+		UpdateCroupierHandListBox();
 	}
 
 	int GameForm::GetActiveHand() {
@@ -143,21 +143,19 @@ namespace oczko {
 		else {
 			Player::Player^ player = players[activeHand];
 
-			MultiplierLabel->Text = player->GetMultiplier().ToString();
+			MultiplierLabel->Text = "x" + player->GetMultiplier().ToString();
 			MultiplierLabel->Show();
 		}
 	}
 
 	void GameForm::UpdateCardCountLabel() {
 		List<Player::Player^>^ players = GetPlayers();
-
 		int activeHand = GetActiveHand();
+		Deck::Deck^ deck = GetDeck();
 
-		if (players->Count < 1) CardCountLabel->Hide();
+		if (players->Count < 1 || deck == nullptr) CardCountLabel->Hide();
 		else {
-			Deck::Deck^ deck = GetDeck();
-
-			CardCountLabel->Text = "x" + deck->GetCountOfCards().ToString();
+			CardCountLabel->Text = deck->GetCountOfCards().ToString();
 			CardCountLabel->Show();
 		}
 	}
@@ -176,8 +174,27 @@ namespace oczko {
 			List<Card::Card^>^ cards = player->GetCards();
 
 			for(int i = 0; i < cards->Count; i++)
-			PlayerHandListBox->Items->Add(cards[i]->GetColor() + "|" + cards[i]->GetValue());
+				PlayerHandListBox->Items->Add(cards[i]->GetColor() + "|" + cards[i]->GetValue());
 			PlayerHandListBox->Show();
+		}
+	}
+
+	void GameForm::UpdateCroupierHandListBox() {
+		CoupierHandListBox->Items->Clear();
+
+		Croupier::Croupier^ croupier = GetCroupier();
+		List<Player::Player^>^ players = GetPlayers();
+
+		if (players->Count < 1 || croupier == nullptr) CoupierHandListBox->Hide();
+		else {
+			List<Card::Card^>^ cards = croupier->GetCards();
+
+			for (int i = 0; i < cards->Count; i++) {
+				if(i == 0) CoupierHandListBox->Items->Add(cards[i]->GetColor() + "|" + cards[i]->GetValue());
+				else CoupierHandListBox->Items->Add("?");
+			}
+
+			CoupierHandListBox->Show();
 		}
 	}
 }
