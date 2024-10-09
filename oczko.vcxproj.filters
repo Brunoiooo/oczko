@@ -31,6 +31,9 @@
     <Filter Include="Game\Croupier">
       <UniqueIdentifier>{362b2f22-e07d-4383-8f6b-854c50678fe0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Score">
+      <UniqueIdentifier>{4e504bca-2569-4cbf-bd49-348d62fb31dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +57,9 @@
     <ClCompile Include="GameForm.cpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Game\Score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -73,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="GameForm.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Game\Score</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
