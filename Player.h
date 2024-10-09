@@ -1,32 +1,18 @@
 #pragma once
 
 #include "Card.h"
+#include "Hand.h"
 
 namespace Player {
 	using namespace System::Collections::Generic;
 
-	public ref class Player {
-		//Models
+	public ref class Player{
 	private:
-		List<Card::Card^>^ Cards;
-		float Bet;
-		float Multiplier;
-		bool Stand;
+		float Money;
 
-		//Methods
 	public:
-		float GetBet();
-		float GetMultiplier();
-		void SetMultiplier(float multiplier);
-		List<Card::Card^>^ GetCards();
-		int GetScore();
-		bool GetStand();
-		void SetStand();
-		
-			
-		//Constructors
-	public:
-		Player(float bet, Card::Card^ firstCard);
-		Player(float bet, Card::Card^ firstCard, Card::Card^ secondCard);
+		Player(float money);
+		float GetMoney();
+		void SetMoney(float money);
 	};
 }

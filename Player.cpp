@@ -2,69 +2,16 @@
 #include <stdexcept>
 
 namespace Player {
-	//Methods
-	float Player::GetBet() {
-		return Bet;
-	}
+	Player::Player(float money) {
+		Money = money >= 0 ? money : 0;
 
-	float Player::GetMultiplier() {
-		return Multiplier;
 	}
-
-	void Player::SetMultiplier(float multiplier) {
-		SetMultiplier(multiplier);
-	}
-
-	List<Card::Card^>^ Player::GetCards() {
-		return Cards;
-	}
-
-	int Player::GetScore()
+	float Player::GetMoney()
 	{
-		List<Card::Card^>^ cards = GetCards();
-
-		int score = 0;
-		for (int i = 0; i < cards->Count; i++)
-			score += cards[i]->GetValue();
-
-		return score;
+		return Money;
 	}
-
-	bool Player::GetStand()
+	void Player::SetMoney(float money)
 	{
-		return Stand;
-	}
-
-	void Player::SetStand()
-	{
-		Stand = true;
-	}
-
-	//Constructors
-	Player::Player(float bet, Card::Card^ firstCard) {
-		if (bet <= 0) throw std::runtime_error("Bet has to be bigger than 0.");
-
-		Bet = bet;
-
-		Cards = gcnew List<Card::Card^>();
-		Cards->Add(firstCard);
-
-		Multiplier = 2;
-
-		Stand = false;
-	}
-
-	Player::Player(float bet, Card::Card^ firstCard, Card::Card^ secondCard) {
-		if (bet <= 0) throw std::runtime_error("Bet has to be bigger than 0.");
-
-		Bet = bet;
-
-		Cards = gcnew List<Card::Card^>();
-		Cards->Add(firstCard);
-		Cards->Add(secondCard);
-
-		Multiplier = 2;
-
-		Stand = false;
+		Money = money >= 0 ? money : 0;
 	}
 }
