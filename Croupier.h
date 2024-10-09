@@ -14,6 +14,7 @@ namespace Croupier {
 		//Methods
 	public:
 		List<Card::Card^>^ GetCards();
+		int GetScore();
 
 		//Constructors
 	public:
