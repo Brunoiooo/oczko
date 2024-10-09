@@ -3,6 +3,7 @@
 #include "Deck.h"
 #include "Player.h"
 #include "Croupier.h"
+#include "Score.h"
 
 namespace oczko {
 
@@ -22,7 +23,9 @@ namespace oczko {
 		Deck::Deck^ Deck;
 		List<Player::Player^>^ Players;
 		int ActiveHand;
+		int ActiveScore;
 		Croupier::Croupier^ Croupier;
+		List<Score::Score^>^ Table;
 
 		//Getters and Setters
 	private:
@@ -31,7 +34,6 @@ namespace oczko {
 
 		Deck::Deck^ GetDeck();
 		void SetDeck(Deck::Deck^ deck);
-		Card::Card^ Draw();
 
 		List<Player::Player^>^ GetPlayers();
 		void AddPlayer(Player::Player^ player);
@@ -41,13 +43,22 @@ namespace oczko {
 
 		Croupier::Croupier^ GetCroupier();
 		void SetCroupier(Croupier::Croupier^ croupier);
+		void AddCroupierCard();
 
 		int GetActiveHand();
 		void SetActiveHand(int activeHand);
 
+		int GetActiveScore();
+		void SetActiveScore(int activeScore);
+
+		List<Score::Score^>^ GetTable();
+		void SetTable(List<Score::Score^>^ table);
+		void AddTableScore(Score::Score^ score);
+
 		//Methods
 	private:
 		void StartNewGame();
+		void CheckGame();
 
 		//Updaters
 	private:
@@ -62,12 +73,20 @@ namespace oczko {
 		void UpdateCroupierHandListBox();
 		void UpdateHitButton();
 		void UpdatePlayerScoreLabel();
+		void UpdateCroupierScoreLabel();
 		void UpdateStandButton();
+		void UpdateTableListBox();
+		void UpdateScoreListBox();
 
 		//Constructor
 	public:
 		GameForm(float money)
 		{
+			/*
+			TODO
+			zrobiæ klase hand dla gracza i krupiera ¿eby wszystkie wspólne metody i kaarty by³y w niej
+			generowaæ karty gracza i krupiera na podstawie listy a nie pozycji
+			*/
 			InitializeComponent();
 
 			WindowState = System::Windows::Forms::FormWindowState::Maximized;
@@ -78,7 +97,9 @@ namespace oczko {
 			Deck = nullptr;
 			Players = gcnew List<Player::Player^>();
 			ActiveHand = -1;
+			ActiveScore = -1;
 			Croupier = nullptr;
+			Table = gcnew List<Score::Score^>();
 
 			MoneyLabel->Text = money.ToString();
 			MultiplierLabel->Hide();
@@ -93,6 +114,8 @@ namespace oczko {
 			SplitBoxListBox->Hide();
 			PlayerScoreLabel->Hide();
 			CroupierScoreLabel->Hide();
+			CroupierScoreLabel->Hide();
+			ScoreListBox->Hide();
 		}
 
 		//Destructor
@@ -123,6 +146,9 @@ namespace oczko {
 		System::Windows::Forms::Label^ MoneyLabel;
 		System::Windows::Forms::Label^ PlayerScoreLabel;
 		System::Windows::Forms::Label^ CroupierScoreLabel;
+		System::Windows::Forms::Button^ TESTButton;
+		System::Windows::Forms::ListBox^ TableListBox;
+		System::Windows::Forms::ListBox^ ScoreListBox;
 
 		//Components container
 	private:
@@ -148,21 +174,24 @@ namespace oczko {
 			this->MoneyLabel = (gcnew System::Windows::Forms::Label());
 			this->PlayerScoreLabel = (gcnew System::Windows::Forms::Label());
 			this->CroupierScoreLabel = (gcnew System::Windows::Forms::Label());
+			this->TESTButton = (gcnew System::Windows::Forms::Button());
+			this->TableListBox = (gcnew System::Windows::Forms::ListBox());
+			this->ScoreListBox = (gcnew System::Windows::Forms::ListBox());
 			this->SuspendLayout();
 			// 
 			// HandsListBox
 			// 
 			this->HandsListBox->FormattingEnabled = true;
 			this->HandsListBox->ItemHeight = 16;
-			this->HandsListBox->Location = System::Drawing::Point(12, 12);
+			this->HandsListBox->Location = System::Drawing::Point(385, 9);
 			this->HandsListBox->Name = L"HandsListBox";
-			this->HandsListBox->Size = System::Drawing::Size(144, 164);
+			this->HandsListBox->Size = System::Drawing::Size(144, 260);
 			this->HandsListBox->TabIndex = 0;
 			this->HandsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::HandsListBox_SelectedIndexChanged);
 			// 
 			// BetTextBox
 			// 
-			this->BetTextBox->Location = System::Drawing::Point(12, 182);
+			this->BetTextBox->Location = System::Drawing::Point(12, 275);
 			this->BetTextBox->Name = L"BetTextBox";
 			this->BetTextBox->Size = System::Drawing::Size(100, 22);
 			this->BetTextBox->TabIndex = 1;
@@ -170,7 +199,7 @@ namespace oczko {
 			// 
 			// NewBetButton
 			// 
-			this->NewBetButton->Location = System::Drawing::Point(12, 210);
+			this->NewBetButton->Location = System::Drawing::Point(12, 303);
 			this->NewBetButton->Name = L"NewBetButton";
 			this->NewBetButton->Size = System::Drawing::Size(75, 23);
 			this->NewBetButton->TabIndex = 2;
@@ -237,7 +266,7 @@ namespace oczko {
 			// BetLabel
 			// 
 			this->BetLabel->AutoSize = true;
-			this->BetLabel->Location = System::Drawing::Point(549, 45);
+			this->BetLabel->Location = System::Drawing::Point(675, 49);
 			this->BetLabel->Name = L"BetLabel";
 			this->BetLabel->Size = System::Drawing::Size(27, 16);
 			this->BetLabel->TabIndex = 9;
@@ -246,7 +275,7 @@ namespace oczko {
 			// MultiplierLabel
 			// 
 			this->MultiplierLabel->AutoSize = true;
-			this->MultiplierLabel->Location = System::Drawing::Point(589, 45);
+			this->MultiplierLabel->Location = System::Drawing::Point(715, 49);
 			this->MultiplierLabel->Name = L"MultiplierLabel";
 			this->MultiplierLabel->Size = System::Drawing::Size(60, 16);
 			this->MultiplierLabel->TabIndex = 10;
@@ -274,7 +303,7 @@ namespace oczko {
 			// MoneyLabel
 			// 
 			this->MoneyLabel->AutoSize = true;
-			this->MoneyLabel->Location = System::Drawing::Point(162, 9);
+			this->MoneyLabel->Location = System::Drawing::Point(535, 9);
 			this->MoneyLabel->Name = L"MoneyLabel";
 			this->MoneyLabel->Size = System::Drawing::Size(48, 16);
 			this->MoneyLabel->TabIndex = 13;
@@ -294,15 +323,47 @@ namespace oczko {
 			this->CroupierScoreLabel->AutoSize = true;
 			this->CroupierScoreLabel->Location = System::Drawing::Point(1614, 195);
 			this->CroupierScoreLabel->Name = L"CroupierScoreLabel";
-			this->CroupierScoreLabel->Size = System::Drawing::Size(118, 20);
+			this->CroupierScoreLabel->Size = System::Drawing::Size(94, 16);
 			this->CroupierScoreLabel->TabIndex = 15;
 			this->CroupierScoreLabel->Text = L"CroupierScore";
+			// 
+			// TESTButton
+			// 
+			this->TESTButton->Location = System::Drawing::Point(856, 377);
+			this->TESTButton->Name = L"TESTButton";
+			this->TESTButton->Size = System::Drawing::Size(75, 23);
+			this->TESTButton->TabIndex = 16;
+			this->TESTButton->Text = L"TEST";
+			this->TESTButton->UseVisualStyleBackColor = true;
+			this->TESTButton->Click += gcnew System::EventHandler(this, &GameForm::TESTButton_Click);
+			// 
+			// TableListBox
+			// 
+			this->TableListBox->FormattingEnabled = true;
+			this->TableListBox->ItemHeight = 16;
+			this->TableListBox->Location = System::Drawing::Point(12, 9);
+			this->TableListBox->Name = L"TableListBox";
+			this->TableListBox->Size = System::Drawing::Size(144, 260);
+			this->TableListBox->TabIndex = 17;
+			this->TableListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::TableListBox_SelectedIndexChanged);
+			// 
+			// ScoreListBox
+			// 
+			this->ScoreListBox->FormattingEnabled = true;
+			this->ScoreListBox->ItemHeight = 16;
+			this->ScoreListBox->Location = System::Drawing::Point(162, 9);
+			this->ScoreListBox->Name = L"ScoreListBox";
+			this->ScoreListBox->Size = System::Drawing::Size(217, 260);
+			this->ScoreListBox->TabIndex = 18;
 			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1787, 777);
+			this->Controls->Add(this->ScoreListBox);
+			this->Controls->Add(this->TableListBox);
+			this->Controls->Add(this->TESTButton);
 			this->Controls->Add(this->CroupierScoreLabel);
 			this->Controls->Add(this->PlayerScoreLabel);
 			this->Controls->Add(this->MoneyLabel);
@@ -331,15 +392,28 @@ namespace oczko {
 	}
 
 	private: System::Void HandsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-		SetActiveHand(PlayerHandListBox->SelectedIndex);
+		SetActiveHand(HandsListBox->SelectedIndex);
 	}
 
 	private: System::Void HitButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		AddPlayerCard();
 	}
 
+	private: System::Void TESTButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		while (true) {
+			SetMoney(1000);
+			StartNewGame();
+			if (GetPlayers()[GetActiveHand()]->GetScore() == 22) break;
+		}
+		
+	}
+
 	private: System::Void StandButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		StandPlayer();
+	}
+
+	private: System::Void TableListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		SetActiveScore(TableListBox->SelectedIndex);
 	}
 };
 }
