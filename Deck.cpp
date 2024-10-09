@@ -2,7 +2,6 @@
 #include <stdexcept>
 
 namespace Deck {
-	//Methods
 	Card::Card^ Deck::Draw() {
 		if (Cards->Count < 1) Reset();
 
@@ -32,7 +31,6 @@ namespace Deck {
 		Cards = cards;
 	}
 
-	//Constructors
 	Deck::Deck() {
 		Random = gcnew System::Random();
 		Cards = gcnew List<Card::Card^>();
