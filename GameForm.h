@@ -3,7 +3,7 @@
 #include "Deck.h"
 #include "Player.h"
 #include "Croupier.h"
-#include "Score.h"
+#include "Bet.h"
 
 namespace oczko {
 
@@ -17,108 +17,76 @@ namespace oczko {
 
 	public ref class GameForm : public System::Windows::Forms::Form
 	{
-		//Models
 	private:
-		float Money;
-		Deck::Deck^ Deck;
-		List<Player::Player^>^ Players;
-		int ActiveHand;
-		int ActiveScore;
+		Player::Player^ Player;
 		Croupier::Croupier^ Croupier;
-		List<Score::Score^>^ Table;
+		List<Bet::Bet^>^ Bets;
+	private: System::Windows::Forms::Button^ button1;
+		   List<Bet::Bet^>^ OldBets;
 
-		//Getters and Setters
 	private:
-		float GetMoney();
-		void SetMoney(float money);
+		void SetPlayerMoney(float money);
 
-		Deck::Deck^ GetDeck();
-		void SetDeck(Deck::Deck^ deck);
+		Card::Card^ DrawCard();
+		Hand::Hand^ NewCroupierHand();
+		Hand::Hand^ NewHand();
+		void FillCroupierHand();
 
-		List<Player::Player^>^ GetPlayers();
-		void AddPlayer(Player::Player^ player);
-		void ClearPlayer();
-		void AddPlayerCard();
-		void StandPlayer();
+		void AddNewBet(Bet::Bet^ bet);
+		void ClearBets();
+		
+		void AddOldBet(Bet::Bet^ bet);
 
-		Croupier::Croupier^ GetCroupier();
-		void SetCroupier(Croupier::Croupier^ croupier);
-		void AddCroupierCard();
-
-		int GetActiveHand();
-		void SetActiveHand(int activeHand);
-
-		int GetActiveScore();
-		void SetActiveScore(int activeScore);
-
-		List<Score::Score^>^ GetTable();
-		void SetTable(List<Score::Score^>^ table);
-		void AddTableScore(Score::Score^ score);
-
-		//Methods
 	private:
 		void StartNewGame();
-		void CheckGame();
 
-		//Updaters
 	private:
-		void UpdateHandsListBox();
-		void UpdateBetButtor();
-		void UpdateNewBetTextBox();
-		void UpdateMoneyLabel();
+		void UpdatePlayerMoneyLabel();
+		void UpdateNewBetButton();
+		void UpdateBetTextBox();
+		void UpdateOldBetsListBox();
+		void UpdateOldBetListBox();
+		void UpdateBetsListBox();
 		void UpdateBetLabel();
 		void UpdateMultiplierLabel();
 		void UpdateCardCountLabel();
 		void UpdatePlayerHandListBox();
-		void UpdateCroupierHandListBox();
-		void UpdateHitButton();
 		void UpdatePlayerScoreLabel();
+		void UpdateCroupierHandListBox();
 		void UpdateCroupierScoreLabel();
+		void UpdateHitButton();
 		void UpdateStandButton();
-		void UpdateTableListBox();
-		void UpdateScoreListBox();
+		void UpdateDoubleButton();
+		void UpdateSplitButton();
+		void UpdateGame();
 
-		//Constructor
 	public:
 		GameForm(float money)
 		{
-			/*
-			TODO
-			zrobiæ klase hand dla gracza i krupiera ¿eby wszystkie wspólne metody i kaarty by³y w niej
-			generowaæ karty gracza i krupiera na podstawie listy a nie pozycji
-			*/
 			InitializeComponent();
 
 			WindowState = System::Windows::Forms::FormWindowState::Maximized;
 
-			if (money <= 0) throw gcnew System::Exception("Start money has to be bigger than 0.");
+			Player = gcnew Player::Player(money >= 0 ? money : 0);
+			Croupier = gcnew Croupier::Croupier();
+			Bets = gcnew List<Bet::Bet^>();
+			OldBets = gcnew List<Bet::Bet^>();
 
-			Money = money;
-			Deck = nullptr;
-			Players = gcnew List<Player::Player^>();
-			ActiveHand = -1;
-			ActiveScore = -1;
-			Croupier = nullptr;
-			Table = gcnew List<Score::Score^>();
-
-			MoneyLabel->Text = money.ToString();
+			PlayerMoneyLabel->Text = Player->GetMoney().ToString();
 			MultiplierLabel->Hide();
-			BetLabel->Hide();
 			CardCountLabel->Hide();
+			BetLabel->Hide();
 			PlayerHandListBox->Hide();
-			CoupierHandListBox->Hide();
+			PlayerScoreLabel->Hide();
+			CroupierHandListBox->Hide();
+			CroupierScoreLabel->Hide();
 			HitButton->Hide();
 			StandButton->Hide();
 			DoubleButton->Hide();
 			SplitButton->Hide();
-			SplitBoxListBox->Hide();
-			PlayerScoreLabel->Hide();
-			CroupierScoreLabel->Hide();
-			CroupierScoreLabel->Hide();
-			ScoreListBox->Hide();
+			OldBetListBox->Hide();
 		}
 
-		//Destructor
 	protected:
 		~GameForm()
 		{
@@ -128,12 +96,10 @@ namespace oczko {
 			}
 		}
 
-		//Components
-	private:
-		System::Windows::Forms::ListBox^ HandsListBox;
+		System::Windows::Forms::ListBox^ BetsListBox;
 		System::Windows::Forms::TextBox^ BetTextBox;
 		System::Windows::Forms::Button^ NewBetButton;
-		System::Windows::Forms::ListBox^ CoupierHandListBox;
+		System::Windows::Forms::ListBox^ CroupierHandListBox;
 		System::Windows::Forms::ListBox^ PlayerHandListBox;
 		System::Windows::Forms::Button^ HitButton;
 		System::Windows::Forms::Button^ StandButton;
@@ -142,26 +108,21 @@ namespace oczko {
 		System::Windows::Forms::Label^ BetLabel;
 		System::Windows::Forms::Label^ MultiplierLabel;
 		System::Windows::Forms::Label^ CardCountLabel;
-		System::Windows::Forms::ListBox^ SplitBoxListBox;
-		System::Windows::Forms::Label^ MoneyLabel;
+		System::Windows::Forms::Label^ PlayerMoneyLabel;
 		System::Windows::Forms::Label^ PlayerScoreLabel;
 		System::Windows::Forms::Label^ CroupierScoreLabel;
-		System::Windows::Forms::Button^ TESTButton;
-		System::Windows::Forms::ListBox^ TableListBox;
-		System::Windows::Forms::ListBox^ ScoreListBox;
-
-		//Components container
-	private:
+		System::Windows::Forms::ListBox^ OldBetsListBox;
+		System::Windows::Forms::ListBox^ OldBetListBox;
 		System::ComponentModel::Container^ components;
 
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
-			this->HandsListBox = (gcnew System::Windows::Forms::ListBox());
+			this->BetsListBox = (gcnew System::Windows::Forms::ListBox());
 			this->BetTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->NewBetButton = (gcnew System::Windows::Forms::Button());
-			this->CoupierHandListBox = (gcnew System::Windows::Forms::ListBox());
+			this->CroupierHandListBox = (gcnew System::Windows::Forms::ListBox());
 			this->PlayerHandListBox = (gcnew System::Windows::Forms::ListBox());
 			this->HitButton = (gcnew System::Windows::Forms::Button());
 			this->StandButton = (gcnew System::Windows::Forms::Button());
@@ -170,24 +131,23 @@ namespace oczko {
 			this->BetLabel = (gcnew System::Windows::Forms::Label());
 			this->MultiplierLabel = (gcnew System::Windows::Forms::Label());
 			this->CardCountLabel = (gcnew System::Windows::Forms::Label());
-			this->SplitBoxListBox = (gcnew System::Windows::Forms::ListBox());
-			this->MoneyLabel = (gcnew System::Windows::Forms::Label());
+			this->PlayerMoneyLabel = (gcnew System::Windows::Forms::Label());
 			this->PlayerScoreLabel = (gcnew System::Windows::Forms::Label());
 			this->CroupierScoreLabel = (gcnew System::Windows::Forms::Label());
-			this->TESTButton = (gcnew System::Windows::Forms::Button());
-			this->TableListBox = (gcnew System::Windows::Forms::ListBox());
-			this->ScoreListBox = (gcnew System::Windows::Forms::ListBox());
+			this->OldBetsListBox = (gcnew System::Windows::Forms::ListBox());
+			this->OldBetListBox = (gcnew System::Windows::Forms::ListBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
-			// HandsListBox
+			// BetsListBox
 			// 
-			this->HandsListBox->FormattingEnabled = true;
-			this->HandsListBox->ItemHeight = 16;
-			this->HandsListBox->Location = System::Drawing::Point(385, 9);
-			this->HandsListBox->Name = L"HandsListBox";
-			this->HandsListBox->Size = System::Drawing::Size(144, 260);
-			this->HandsListBox->TabIndex = 0;
-			this->HandsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::HandsListBox_SelectedIndexChanged);
+			this->BetsListBox->FormattingEnabled = true;
+			this->BetsListBox->ItemHeight = 16;
+			this->BetsListBox->Location = System::Drawing::Point(385, 9);
+			this->BetsListBox->Name = L"BetsListBox";
+			this->BetsListBox->Size = System::Drawing::Size(144, 260);
+			this->BetsListBox->TabIndex = 0;
+			this->BetsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::BetsListBox_SelectedIndexChanged);
 			// 
 			// BetTextBox
 			// 
@@ -207,14 +167,14 @@ namespace oczko {
 			this->NewBetButton->UseVisualStyleBackColor = true;
 			this->NewBetButton->Click += gcnew System::EventHandler(this, &GameForm::NewBetButton_Click);
 			// 
-			// CoupierHandListBox
+			// CroupierHandListBox
 			// 
-			this->CoupierHandListBox->FormattingEnabled = true;
-			this->CoupierHandListBox->ItemHeight = 16;
-			this->CoupierHandListBox->Location = System::Drawing::Point(1617, 12);
-			this->CoupierHandListBox->Name = L"CoupierHandListBox";
-			this->CoupierHandListBox->Size = System::Drawing::Size(158, 180);
-			this->CoupierHandListBox->TabIndex = 3;
+			this->CroupierHandListBox->FormattingEnabled = true;
+			this->CroupierHandListBox->ItemHeight = 16;
+			this->CroupierHandListBox->Location = System::Drawing::Point(1617, 12);
+			this->CroupierHandListBox->Name = L"CroupierHandListBox";
+			this->CroupierHandListBox->Size = System::Drawing::Size(158, 180);
+			this->CroupierHandListBox->TabIndex = 3;
 			// 
 			// PlayerHandListBox
 			// 
@@ -253,6 +213,7 @@ namespace oczko {
 			this->DoubleButton->TabIndex = 7;
 			this->DoubleButton->Text = L"Double";
 			this->DoubleButton->UseVisualStyleBackColor = true;
+			this->DoubleButton->Click += gcnew System::EventHandler(this, &GameForm::DoubleButton_Click);
 			// 
 			// SplitButton
 			// 
@@ -262,6 +223,7 @@ namespace oczko {
 			this->SplitButton->TabIndex = 8;
 			this->SplitButton->Text = L"Split";
 			this->SplitButton->UseVisualStyleBackColor = true;
+			this->SplitButton->Click += gcnew System::EventHandler(this, &GameForm::SplitButton_Click);
 			// 
 			// BetLabel
 			// 
@@ -291,23 +253,14 @@ namespace oczko {
 			this->CardCountLabel->TabIndex = 11;
 			this->CardCountLabel->Text = L"Card Count";
 			// 
-			// SplitBoxListBox
+			// PlayerMoneyLabel
 			// 
-			this->SplitBoxListBox->FormattingEnabled = true;
-			this->SplitBoxListBox->ItemHeight = 16;
-			this->SplitBoxListBox->Location = System::Drawing::Point(1034, 538);
-			this->SplitBoxListBox->Name = L"SplitBoxListBox";
-			this->SplitBoxListBox->Size = System::Drawing::Size(158, 180);
-			this->SplitBoxListBox->TabIndex = 12;
-			// 
-			// MoneyLabel
-			// 
-			this->MoneyLabel->AutoSize = true;
-			this->MoneyLabel->Location = System::Drawing::Point(535, 9);
-			this->MoneyLabel->Name = L"MoneyLabel";
-			this->MoneyLabel->Size = System::Drawing::Size(48, 16);
-			this->MoneyLabel->TabIndex = 13;
-			this->MoneyLabel->Text = L"Money";
+			this->PlayerMoneyLabel->AutoSize = true;
+			this->PlayerMoneyLabel->Location = System::Drawing::Point(118, 275);
+			this->PlayerMoneyLabel->Name = L"PlayerMoneyLabel";
+			this->PlayerMoneyLabel->Size = System::Drawing::Size(87, 16);
+			this->PlayerMoneyLabel->TabIndex = 13;
+			this->PlayerMoneyLabel->Text = L"PlayerMoney";
 			// 
 			// PlayerScoreLabel
 			// 
@@ -327,47 +280,46 @@ namespace oczko {
 			this->CroupierScoreLabel->TabIndex = 15;
 			this->CroupierScoreLabel->Text = L"CroupierScore";
 			// 
-			// TESTButton
+			// OldBetsListBox
 			// 
-			this->TESTButton->Location = System::Drawing::Point(856, 377);
-			this->TESTButton->Name = L"TESTButton";
-			this->TESTButton->Size = System::Drawing::Size(75, 23);
-			this->TESTButton->TabIndex = 16;
-			this->TESTButton->Text = L"TEST";
-			this->TESTButton->UseVisualStyleBackColor = true;
-			this->TESTButton->Click += gcnew System::EventHandler(this, &GameForm::TESTButton_Click);
+			this->OldBetsListBox->FormattingEnabled = true;
+			this->OldBetsListBox->ItemHeight = 16;
+			this->OldBetsListBox->Location = System::Drawing::Point(12, 9);
+			this->OldBetsListBox->Name = L"OldBetsListBox";
+			this->OldBetsListBox->Size = System::Drawing::Size(144, 260);
+			this->OldBetsListBox->TabIndex = 17;
+			this->OldBetsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::OldBetsListBox_SelectedIndexChanged);
 			// 
-			// TableListBox
+			// OldBetListBox
 			// 
-			this->TableListBox->FormattingEnabled = true;
-			this->TableListBox->ItemHeight = 16;
-			this->TableListBox->Location = System::Drawing::Point(12, 9);
-			this->TableListBox->Name = L"TableListBox";
-			this->TableListBox->Size = System::Drawing::Size(144, 260);
-			this->TableListBox->TabIndex = 17;
-			this->TableListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::TableListBox_SelectedIndexChanged);
+			this->OldBetListBox->FormattingEnabled = true;
+			this->OldBetListBox->ItemHeight = 16;
+			this->OldBetListBox->Location = System::Drawing::Point(162, 9);
+			this->OldBetListBox->Name = L"OldBetListBox";
+			this->OldBetListBox->Size = System::Drawing::Size(217, 260);
+			this->OldBetListBox->TabIndex = 18;
 			// 
-			// ScoreListBox
+			// button1
 			// 
-			this->ScoreListBox->FormattingEnabled = true;
-			this->ScoreListBox->ItemHeight = 16;
-			this->ScoreListBox->Location = System::Drawing::Point(162, 9);
-			this->ScoreListBox->Name = L"ScoreListBox";
-			this->ScoreListBox->Size = System::Drawing::Size(217, 260);
-			this->ScoreListBox->TabIndex = 18;
+			this->button1->Location = System::Drawing::Point(814, 303);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 19;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &GameForm::button1_Click);
 			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1787, 777);
-			this->Controls->Add(this->ScoreListBox);
-			this->Controls->Add(this->TableListBox);
-			this->Controls->Add(this->TESTButton);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->OldBetListBox);
+			this->Controls->Add(this->OldBetsListBox);
 			this->Controls->Add(this->CroupierScoreLabel);
 			this->Controls->Add(this->PlayerScoreLabel);
-			this->Controls->Add(this->MoneyLabel);
-			this->Controls->Add(this->SplitBoxListBox);
+			this->Controls->Add(this->PlayerMoneyLabel);
 			this->Controls->Add(this->CardCountLabel);
 			this->Controls->Add(this->MultiplierLabel);
 			this->Controls->Add(this->BetLabel);
@@ -376,10 +328,10 @@ namespace oczko {
 			this->Controls->Add(this->StandButton);
 			this->Controls->Add(this->HitButton);
 			this->Controls->Add(this->PlayerHandListBox);
-			this->Controls->Add(this->CoupierHandListBox);
+			this->Controls->Add(this->CroupierHandListBox);
 			this->Controls->Add(this->NewBetButton);
 			this->Controls->Add(this->BetTextBox);
-			this->Controls->Add(this->HandsListBox);
+			this->Controls->Add(this->BetsListBox);
 			this->Name = L"GameForm";
 			this->Text = L"GameForm";
 			this->ResumeLayout(false);
@@ -388,32 +340,168 @@ namespace oczko {
 		}
 #pragma endregion
 	private: System::Void NewBetButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		StartNewGame();
+		try {
+			StartNewGame();
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show(ex->Message);
+		}
 	}
 
-	private: System::Void HandsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-		SetActiveHand(HandsListBox->SelectedIndex);
+	private: System::Void BetsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		UpdateBetLabel();
+		UpdateMultiplierLabel();
+
+		UpdatePlayerHandListBox();
+		UpdatePlayerScoreLabel();
+		UpdateHitButton();
+		UpdateStandButton();
+		UpdateDoubleButton();
+		UpdateSplitButton();
 	}
 
 	private: System::Void HitButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddPlayerCard();
+		int selectedIndex = BetsListBox->SelectedIndex;
+
+		if (selectedIndex < 0)
+			return;
+
+		if (Bets->Count < 1)
+			return;
+
+		Bet::Bet^ bet = Bets[selectedIndex];
+
+		if (bet->IsStop())
+			return;
+
+		try {
+			bet->PlayHit(DrawCard());
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show(ex->Message);
+		}
+
+		UpdatePlayerHandListBox();
+		UpdatePlayerScoreLabel();
+		UpdateHitButton();
+		UpdateStandButton();
+		UpdateDoubleButton();
+		UpdateSplitButton();
+		UpdateGame();
 	}
 
-	private: System::Void TESTButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		while (true) {
-			SetMoney(1000);
-			StartNewGame();
-			if (GetPlayers()[GetActiveHand()]->GetScore() == 22) break;
-		}
-		
-	}
 
 	private: System::Void StandButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		StandPlayer();
+		int selectedIndex = BetsListBox->SelectedIndex;
+
+		if (selectedIndex < 0)
+			return;
+
+		if (Bets->Count < 1)
+			return;
+
+		Bet::Bet^ bet = Bets[selectedIndex];
+
+		if (bet->IsStop())
+			return;
+
+		bet->PlayStand();
+
+		UpdateHitButton();
+		UpdateStandButton();
+		UpdateDoubleButton();
+		UpdateSplitButton();
+		UpdateGame();
 	}
 
-	private: System::Void TableListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-		SetActiveScore(TableListBox->SelectedIndex);
+	private: System::Void OldBetsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		UpdateOldBetListBox();
 	}
+
+	private: System::Void DoubleButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		int selectedIndex = BetsListBox->SelectedIndex;
+
+		if (selectedIndex < 0)
+			return;
+
+		if (Bets->Count < 1)
+			return;
+
+		Bet::Bet^ bet = Bets[selectedIndex];
+
+		if (bet->IsHit())
+			return;
+
+		if (bet->IsStop())
+			return;
+
+		if (Player->GetMoney() < bet->GetBaseBet())
+			return;
+
+		SetPlayerMoney(Player->GetMoney() - bet->GetBaseBet());
+		try
+		{
+			bet->PlayDouble(DrawCard());
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show(ex->Message);
+		}
+
+		UpdateBetLabel();
+		UpdatePlayerHandListBox();
+		UpdatePlayerScoreLabel();
+		UpdateHitButton();
+		UpdateStandButton();
+		UpdateDoubleButton();
+		UpdateSplitButton();
+		UpdateGame();
+
+	}
+	private: System::Void SplitButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		int selectedIndex = BetsListBox->SelectedIndex;
+
+		if (selectedIndex < 0)
+			return;
+
+		if (Bets->Count < 1)
+			return;
+
+		Bet::Bet^ bet = Bets[selectedIndex];
+
+		if (Player->GetMoney() < bet->GetBaseBet())
+			return;
+
+		if (!bet->CanSplit())
+			return;
+
+		SetPlayerMoney(Player->GetMoney() - bet->GetBaseBet());
+
+		Hand::Hand^ croupierHand = Croupier->GetCroupierHand();
+
+		List<Card::Card^>^ cards = gcnew List<Card::Card^>();
+		cards->Add(bet->PlaySplit());
+		Hand::Hand^ playerHand = gcnew Hand::Hand(cards);
+
+		Bet::Bet^ newBet = gcnew Bet::Bet(bet->GetBaseBet(), playerHand, croupierHand);
+		AddNewBet(newBet);
+
+		BetsListBox->SelectedIndex = 0;
+
+		UpdatePlayerHandListBox();
+		UpdatePlayerScoreLabel();
+		UpdateHitButton();
+		UpdateStandButton();
+		UpdateDoubleButton();
+		UpdateSplitButton();
+		UpdateGame();
+	}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	while (true) {
+		SetPlayerMoney(1000);
+		StartNewGame();
+		if (Bets[0]->CanSplit())
+			break;
+	}
+}
 };
 }
