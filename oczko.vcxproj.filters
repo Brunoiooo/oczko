@@ -31,8 +31,11 @@
     <Filter Include="Game\Croupier">
       <UniqueIdentifier>{362b2f22-e07d-4383-8f6b-854c50678fe0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Score">
-      <UniqueIdentifier>{4e504bca-2569-4cbf-bd49-348d62fb31dc}</UniqueIdentifier>
+    <Filter Include="Game\Hand">
+      <UniqueIdentifier>{63ee07aa-3241-44bb-9b0d-2295c12de7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Bet">
+      <UniqueIdentifier>{67f7e266-d7a5-4442-9979-a2e934be757d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,8 +60,11 @@
     <ClCompile Include="GameForm.cpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClCompile>
-    <ClCompile Include="Score.cpp">
-      <Filter>Game\Score</Filter>
+    <ClCompile Include="Hand.cpp">
+      <Filter>Game\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Bet.cpp">
+      <Filter>Game\Bet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,8 +86,11 @@
     <ClInclude Include="GameForm.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Score.h">
-      <Filter>Game\Score</Filter>
+    <ClInclude Include="Hand.h">
+      <Filter>Game\Hand</Filter>
+    </ClInclude>
+    <ClInclude Include="Bet.h">
+      <Filter>Game\Bet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

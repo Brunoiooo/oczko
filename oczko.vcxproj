@@ -124,10 +124,11 @@
     <ClCompile Include="Croupier.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="GameForm.cpp" />
+    <ClCompile Include="Hand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuForm.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="Bet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
@@ -136,11 +137,12 @@
     <ClInclude Include="GameForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Hand.h" />
+    <ClInclude Include="Bet.h" />
     <ClInclude Include="MenuForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Score.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico" />
