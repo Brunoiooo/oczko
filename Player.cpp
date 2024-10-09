@@ -49,7 +49,7 @@ namespace Player {
 		Cards = gcnew List<Card::Card^>();
 		Cards->Add(firstCard);
 
-		Multiplier = 1;
+		Multiplier = 2;
 
 		Stand = false;
 	}
@@ -63,7 +63,7 @@ namespace Player {
 		Cards->Add(firstCard);
 		Cards->Add(secondCard);
 
-		Multiplier = 1;
+		Multiplier = 2;
 
 		Stand = false;
 	}
