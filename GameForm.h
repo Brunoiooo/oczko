@@ -21,7 +21,7 @@ namespace oczko {
 		Player::Player^ Player;
 		Croupier::Croupier^ Croupier;
 		List<Bet::Bet^>^ Bets;
-	private: System::Windows::Forms::Button^ button1;
+
 		   List<Bet::Bet^>^ OldBets;
 
 	private:
@@ -136,7 +136,6 @@ namespace oczko {
 			this->CroupierScoreLabel = (gcnew System::Windows::Forms::Label());
 			this->OldBetsListBox = (gcnew System::Windows::Forms::ListBox());
 			this->OldBetListBox = (gcnew System::Windows::Forms::ListBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// BetsListBox
@@ -299,22 +298,11 @@ namespace oczko {
 			this->OldBetListBox->Size = System::Drawing::Size(217, 260);
 			this->OldBetListBox->TabIndex = 18;
 			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(814, 303);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 19;
-			this->button1->Text = L"button1";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &GameForm::button1_Click);
-			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1787, 777);
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->OldBetListBox);
 			this->Controls->Add(this->OldBetsListBox);
 			this->Controls->Add(this->CroupierScoreLabel);
@@ -495,13 +483,5 @@ namespace oczko {
 		UpdateSplitButton();
 		UpdateGame();
 	}
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	while (true) {
-		SetPlayerMoney(1000);
-		StartNewGame();
-		if (Bets[0]->CanSplit())
-			break;
-	}
-}
 };
 }
