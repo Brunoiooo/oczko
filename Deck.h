@@ -15,6 +15,7 @@ namespace Deck {
 	public:
 		Card::Card^ Draw();
 		unsigned int GetCountOfCards();
+		void Reset();
 
 		//Constructors
 	public:

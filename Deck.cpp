@@ -4,7 +4,7 @@
 namespace Deck {
 	//Methods
 	Card::Card^ Deck::Draw() {
-		if (Cards->Count < 1) throw std::runtime_error("Desk is empty.");
+		if (Cards->Count < 1) Reset();
 
 		int index = Random->Next(0, Cards->Count - 1);
 
@@ -18,17 +18,25 @@ namespace Deck {
 		return Cards->Count;
 	}
 
-	//Constructors
-	Deck::Deck() {
-		Random = gcnew System::Random();
-
-		Cards = gcnew List<Card::Card^>();
-
+	void Deck::Reset()
+	{
+		List<Card::Card^>^ cards = gcnew List<Card::Card^>();
 		for (unsigned int i = 1; i <= 4; i++)
 		{
 			for (unsigned int x = 2; x <= 11; x++) {
-				Cards->Add(gcnew Card::Card(i, x));
+				cards->Add(gcnew Card::Card(i, x));
 			}
 		}
+
+		
+		Cards = cards;
+	}
+
+	//Constructors
+	Deck::Deck() {
+		Random = gcnew System::Random();
+		Cards = gcnew List<Card::Card^>();
+
+		Reset();
 	}
 }
