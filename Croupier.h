@@ -1,23 +1,27 @@
 #pragma once
 
 #include "Card.h"
-#include <stdexcept>
+#include "Hand.h"
+#include "Deck.h"
 
 namespace Croupier {
 	using namespace System::Collections::Generic;
 
 	public ref class Croupier {
-		//Models
 	private:
-		List<Card::Card^>^ Cards;
+		Deck::Deck^ Deck;
+		Hand::Hand^ CroupierHand;
 
-		//Methods
 	public:
-		List<Card::Card^>^ GetCards();
-		int GetScore();
+		Croupier();
 
-		//Constructors
-	public:
-		Croupier(Card::Card^ firstCard, Card::Card^ secondCard);
+		Hand::Hand^ GetCroupierHand();
+		Hand::Hand^ NewCroupierHand();
+
+		Hand::Hand^ NewHand();
+		
+		void FillCroupierHand();
+		Deck::Deck^ GetDeck();
+
 	};
 }

@@ -1,27 +1,41 @@
 #include "Croupier.h"
-#include <stdexcept>
 
 namespace Croupier {
-	//Methods
-	List<Card::Card^>^ Croupier::GetCards() {
-		return Cards;
+	Croupier::Croupier() {
+		Deck = gcnew Deck::Deck();
+		CroupierHand = NewHand();
 	}
 
-	int Croupier::GetScore()
+	Hand::Hand^ Croupier::NewHand()
 	{
-		List<Card::Card^>^ cards = GetCards();
+		List<Card::Card^>^ cards = gcnew List<Card::Card^>();
+		cards->Add(GetDeck()->Draw());
+		cards->Add(GetDeck()->Draw());
 
-		int score = 0;
-		for (int i = 0; i < cards->Count; i++)
-			score += cards[i]->GetValue();
-
-		return score;
+		return gcnew Hand::Hand(cards);
 	}
 
-	//Constructors
-	Croupier::Croupier(Card::Card^ firstCard, Card::Card^ secondCard) {
-		Cards = gcnew List<Card::Card^>();
-		Cards->Add(firstCard);
-		Cards->Add(secondCard);
+	Hand::Hand^ Croupier::GetCroupierHand()
+	{
+		return CroupierHand;
+	}
+
+	Hand::Hand^ Croupier::NewCroupierHand()
+	{
+		Deck->Reset();
+		Hand::Hand^ hand = NewHand();
+		CroupierHand = hand;
+		return hand;
+	}
+
+	void Croupier::FillCroupierHand()
+	{
+		while (CroupierHand->GetScore() < 17) {
+			CroupierHand->AddCart(Deck->Draw());
+		}
+	}
+
+	Deck::Deck^ Croupier::GetDeck() {
+		return Deck;
 	}
 }
