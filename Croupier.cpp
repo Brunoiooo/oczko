@@ -23,16 +23,14 @@ namespace Croupier {
 	Hand::Hand^ Croupier::NewCroupierHand()
 	{
 		Deck->Reset();
-		Hand::Hand^ hand = NewHand();
-		CroupierHand = hand;
-		return hand;
+		CroupierHand = NewHand();
+		return CroupierHand;
 	}
 
 	void Croupier::FillCroupierHand()
 	{
-		while (CroupierHand->GetScore() < 17) {
+		while (CroupierHand->GetScore() < 17) 
 			CroupierHand->AddCart(Deck->Draw());
-		}
 	}
 
 	Deck::Deck^ Croupier::GetDeck() {
