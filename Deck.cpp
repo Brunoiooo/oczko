@@ -5,9 +5,7 @@ namespace Deck {
 	Card::Card^ Deck::Draw() {
 		if (Cards->Count < 1) Reset();
 
-		int index = Random->Next(0, Cards->Count - 1);
-
-		Card::Card^ card = Cards[index];
+		Card::Card^ card = Cards[Random->Next(0, Cards->Count - 1)];
 		Cards->Remove(card);
 
 		return card;
@@ -19,16 +17,10 @@ namespace Deck {
 
 	void Deck::Reset()
 	{
-		List<Card::Card^>^ cards = gcnew List<Card::Card^>();
+		Cards = gcnew List<Card::Card^>();
 		for (unsigned int i = 1; i <= 4; i++)
-		{
-			for (unsigned int x = 2; x <= 11; x++) {
-				cards->Add(gcnew Card::Card(i, x));
-			}
-		}
-
-		
-		Cards = cards;
+			for (unsigned int x = 2; x <= 11; x++) 
+				Cards->Add(gcnew Card::Card(i, x));
 	}
 
 	Deck::Deck() {
