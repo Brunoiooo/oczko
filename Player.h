@@ -13,6 +13,8 @@ namespace Player {
 	public:
 		Player(float money);
 		float GetMoney();
-		void SetMoney(float money);
+		bool CanWithdrawal(float money);
+		void Deposit(float money);
+		void Withdrawal(float money);
 	};
 }
