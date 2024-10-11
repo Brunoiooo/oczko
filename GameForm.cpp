@@ -1,9 +1,16 @@
 #include "GameForm.h"
 
 namespace oczko {
-	void GameForm::SetPlayerMoney(float money)
+	void GameForm::Deposit(float money)
 	{
-		Player->SetMoney(money >= 0 ? money : 0);
+		Player->Deposit(money);
+
+		UpdatePlayerMoneyLabel();
+	}
+
+	void GameForm::Withdrawal(float money)
+	{
+		Player->Withdrawal(money);
 
 		UpdatePlayerMoneyLabel();
 	}
@@ -70,31 +77,60 @@ namespace oczko {
 
 	void GameForm::AddOldBet(Bet::Bet^ bet)
 	{
-		SetPlayerMoney(Player->GetMoney() + bet->Payout());
+		Deposit(bet->Payout());
 		OldBets->Add(bet);
 
 		UpdateOldBetsListBox();
 	}
 
-	void GameForm::StartNewGame()
+	bool GameForm::IsHit()
 	{
-		ClearBets();
+		try {
+			if (!Bets[BetsListBox->SelectedIndex]->IsStop()) return true;
+		}
+		catch (Exception^ e){}
 
-		float baseBet = Single::Parse(BetTextBox->Text);
+		return false;
+	}
 
-		float money = Player->GetMoney();
-		if (Player->GetMoney() < baseBet) throw gcnew System::Exception("Bet has not been bigger than the player's money.");
+	bool GameForm::IsStand()
+	{
+		try {
+			if (!Bets[BetsListBox->SelectedIndex]->IsStop()) return true;
+		}
+		catch (Exception^ e){}
 
-		SetPlayerMoney(money - baseBet);
+		return false;
+	}
 
-		Hand::Hand^ croupierHand = Croupier->NewCroupierHand();
-		Hand::Hand^ playerHand = Croupier->NewHand();
+	bool GameForm::IsDouble()
+	{
+		try {
+			if (!Bets[BetsListBox->SelectedIndex]->IsStop() && 
+				!Bets[BetsListBox->SelectedIndex]->IsHit() &&
+				Player->CanWithdrawal(Bets[BetsListBox->SelectedIndex]->GetBaseBet()))
+				return true;
+		}
+		catch (Exception^ e) {}
 
-		Bet::Bet^ bet = gcnew Bet::Bet(baseBet, playerHand, croupierHand);
+		return false;
+	}
 
-		AddNewBet(bet);
+	bool GameForm::IsSplit()
+	{
+		try {
+			if (Player->CanWithdrawal(Bets[BetsListBox->SelectedIndex]->GetBaseBet()) &&
+				Bets[BetsListBox->SelectedIndex]->CanSplit())
+				return true;
+		}
+		catch (Exception^ e) {}
 
-		BetsListBox->SelectedIndex = 0;
+		return false;
+	}
+
+	bool GameForm::IsBet()
+	{
+		return 0 <= BetsListBox->SelectedIndex && BetsListBox->SelectedIndex < Bets->Count ? true : false;
 	}
 
 	void GameForm::UpdatePlayerMoneyLabel()
@@ -131,14 +167,11 @@ namespace oczko {
 
 	void GameForm::UpdateOldBetListBox()
 	{
-		int selectedIndex = OldBetsListBox->SelectedIndex;
-
 		OldBetListBox->Items->Clear();
+		OldBetListBox->Hide();
 
-		if (selectedIndex < 0)
-			OldBetListBox->Hide();
-		else {
-			Bet::Bet^ oldBet = OldBets[selectedIndex];
+		if (BetsListBox->SelectedIndex < Bets->Count){
+			Bet::Bet^ oldBet = OldBets[OldBetsListBox->SelectedIndex];
 
 			OldBetListBox->Items->Add("Stop: " + oldBet->IsStop().ToString());
 			OldBetListBox->Items->Add("Win: " + oldBet->IsWin().ToString());
@@ -173,24 +206,22 @@ namespace oczko {
 
 	void GameForm::UpdateBetLabel()
 	{
-		int selectedIndex = BetsListBox->SelectedIndex;
-		if (selectedIndex < 0)
-			BetLabel->Hide();
-		else {
-			Bet::Bet^ bet = Bets[selectedIndex];
+		BetLabel->Hide();
+
+		if (IsBet()){
+			Bet::Bet^ bet = Bets[BetsListBox->SelectedIndex];
 			BetLabel->Text = bet->GetBaseBet().ToString();
 			BetLabel->Show();
 		}
 	}
 
-	void GameForm::UpdateMultiplierLabel()
-	{
-		int selectedIndex = BetsListBox->SelectedIndex;
-		if (selectedIndex < 0)
-			MultiplierLabel->Hide();
-		else {
-			Bet::Bet^ bet = Bets[selectedIndex];
-			MultiplierLabel->Text = "x" + bet->GetMultiplier().ToString();
+	void GameForm::UpdateMultiplierLabel(){
+	
+		MultiplierLabel->Hide();
+
+		if (IsBet()){
+			MultiplierLabel->Text = "x" + Bets[BetsListBox->SelectedIndex]->GetMultiplier().ToString();
+
 			MultiplierLabel->Show();
 		}
 	}
@@ -205,11 +236,8 @@ namespace oczko {
 		PlayerScoreLabel->Hide();
 		PlayerHandListBox->Items->Clear();
 
-		int selectedIndex = BetsListBox->SelectedIndex;
-		if (selectedIndex >= 0) {
-			Bet::Bet^ bet = Bets[selectedIndex];
-
-			for each (Card::Card ^ card in bet->GetPlayerHand()->GetCards())
+		if (IsBet()) {
+			for each (Card::Card ^ card in Bets[BetsListBox->SelectedIndex]->GetPlayerHand()->GetCards())
 				PlayerHandListBox->Items->Add(card->GetColor() + "|" + card->GetValue());
 
 			PlayerHandListBox->Show();
@@ -220,11 +248,8 @@ namespace oczko {
 	{
 		PlayerScoreLabel->Hide();
 
-		int selectedIndex = BetsListBox->SelectedIndex;
-		if (selectedIndex >= 0){
-			Bet::Bet^ bet = Bets[selectedIndex];
-
-			PlayerScoreLabel->Text = bet->GetPlayerHand()->GetScore().ToString();
+		if (IsBet()){
+			PlayerScoreLabel->Text = Bets[BetsListBox->SelectedIndex]->GetPlayerHand()->GetScore().ToString();
 
 			PlayerScoreLabel->Show();
 		}
@@ -235,24 +260,18 @@ namespace oczko {
 		CroupierHandListBox->Items->Clear();
 		CroupierHandListBox->Hide();
 
-		Hand::Hand^ hand = Croupier->GetCroupierHand();
-		List<Card::Card^>^ cards = hand->GetCards();
-
 		int doneBets = 0;
 		for each (Bet::Bet ^ bet in Bets)
-		{
 			if (bet->IsStop()) doneBets++;
-		}
-
-		if (cards->Count == 2 && Bets->Count != doneBets) {
-			CroupierHandListBox->Items->Add(cards[0]->GetColor() + "|" + cards[0]->GetValue());
+		
+		if (Croupier->GetCroupierHand()->GetCards()->Count == 2 && Bets->Count != doneBets) {
+			CroupierHandListBox->Items->Add(Croupier->GetCroupierHand()->GetCards()[0]->GetColor() + "|" + Croupier->GetCroupierHand()->GetCards()[0]->GetValue());
 			CroupierHandListBox->Items->Add("?|?");
 
 			CroupierHandListBox->Show();
-
 		}
 		else {
-			for each (Card::Card ^ card in cards)
+			for each (Card::Card ^ card in Croupier->GetCroupierHand()->GetCards())
 				CroupierHandListBox->Items->Add(card->GetColor() + "|" + card->GetValue());
 
 			CroupierHandListBox->Show();
@@ -263,108 +282,48 @@ namespace oczko {
 	{
 		CroupierScoreLabel->Hide();
 
-		Hand::Hand^ hand = Croupier->GetCroupierHand();
-		List<Card::Card^>^ cards = hand->GetCards();
-
 		int doneBets = 0;
 		for each (Bet::Bet ^ bet in Bets)
-		{
 			if (bet->IsStop()) doneBets++;
-		}
+		
+		if (Croupier->GetCroupierHand()->GetCards()->Count == 2 && Bets->Count != doneBets)
+			CroupierScoreLabel->Text = Croupier->GetCroupierHand()->GetCards()[0]->GetValue().ToString();
+		else 
+			CroupierScoreLabel->Text = Croupier->GetCroupierHand()->GetScore().ToString();
 
-		if (cards->Count == 2 && Bets->Count != doneBets) {
-			CroupierScoreLabel->Text = cards[0]->GetValue().ToString();
-
-			CroupierScoreLabel->Show();
-		}
-		else {
-			CroupierScoreLabel->Text = hand->GetScore().ToString();
-
-			CroupierScoreLabel->Show();
-		}
+		CroupierScoreLabel->Show();
 	}
 
 	void GameForm::UpdateHitButton()
 	{
-		HitButton->Hide();
-
-		int selectedIndex = BetsListBox->SelectedIndex;
-		if (selectedIndex < 0)
-			return;
-
-		if (Bets->Count < 1)
-			return;
-
-		Bet::Bet^ bet = Bets[selectedIndex];
-
-		if (bet->IsStop())
-			return;
-
-		HitButton->Show();
+		if (IsHit())
+			HitButton->Show();
+		else
+			HitButton->Hide();
 	}
 
 	void GameForm::UpdateStandButton()
 	{
-		StandButton->Hide();
-
-		int selectedIndex = BetsListBox->SelectedIndex;
-		if (selectedIndex < 0)
-			return;
-
-		if (Bets->Count < 1)
-			return;
-
-		Bet::Bet^ bet = Bets[selectedIndex];
-
-		if (bet->IsStop())
-			return;
-
-		StandButton->Show();
+		if(IsStand())
+			StandButton->Show();
+		else 
+			StandButton->Hide();
 	}
 
 	void GameForm::UpdateDoubleButton()
 	{
-		DoubleButton->Hide();
-
-		int selectedIndex = BetsListBox->SelectedIndex;
-		if (selectedIndex < 0)
-			return;
-
-		if (Bets->Count < 1)
-			return;
-
-		Bet::Bet^ bet = Bets[selectedIndex];
-
-		if (bet->IsStop())
-			return;
-
-		if (bet->IsHit())
-			return;
-
-		DoubleButton->Show();
+		if (IsDouble())
+			DoubleButton->Show();
+		else
+			DoubleButton->Hide();
 	}
 
 	void GameForm::UpdateSplitButton()
 	{
-		SplitButton->Hide();
-
-		int selectedIndex = BetsListBox->SelectedIndex;
-
-		if (selectedIndex < 0)
-			return;
-
-		if (Bets->Count < 1)
-			return;
-
-		Bet::Bet^ bet = Bets[selectedIndex];
-
-		if (Player->GetMoney() < bet->GetBaseBet())
-			return;
-
-		if (!bet->CanSplit())
-			return;
-
-		SplitButton->Show();
+		if (IsSplit())
+			SplitButton->Show();
+		else
+			SplitButton->Hide();
 	}
 
 	void GameForm::UpdateGame()
@@ -372,19 +331,14 @@ namespace oczko {
 		if (Bets->Count < 1)
 			return;
 
-		int doneBets = 0;
 		for each (Bet::Bet ^ bet in Bets)
-		{
-			if (bet->IsStop()) doneBets++;
-		}
-		if (Bets->Count != doneBets) return;
+			if (!bet->IsStop()) return;
 
 		FillCroupierHand();
 
 		for each (Bet::Bet ^ bet in Bets)
-		{
 			AddOldBet(bet);
-		}
+		
 		ClearBets();
 	}
 }

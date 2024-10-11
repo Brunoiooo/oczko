@@ -21,11 +21,11 @@ namespace oczko {
 		Player::Player^ Player;
 		Croupier::Croupier^ Croupier;
 		List<Bet::Bet^>^ Bets;
-
-		   List<Bet::Bet^>^ OldBets;
+		List<Bet::Bet^>^ OldBets;
 
 	private:
-		void SetPlayerMoney(float money);
+		void Deposit(float money);
+		void Withdrawal(float money);
 
 		Card::Card^ DrawCard();
 		Hand::Hand^ NewCroupierHand();
@@ -38,7 +38,11 @@ namespace oczko {
 		void AddOldBet(Bet::Bet^ bet);
 
 	private:
-		void StartNewGame();
+		bool IsHit();
+		bool IsStand();
+		bool IsDouble();
+		bool IsSplit();
+		bool IsBet();
 
 	private:
 		void UpdatePlayerMoneyLabel();
@@ -67,7 +71,7 @@ namespace oczko {
 
 			WindowState = System::Windows::Forms::FormWindowState::Maximized;
 
-			Player = gcnew Player::Player(money >= 0 ? money : 0);
+			Player = gcnew Player::Player(money);
 			Croupier = gcnew Croupier::Croupier();
 			Bets = gcnew List<Bet::Bet^>();
 			OldBets = gcnew List<Bet::Bet^>();
@@ -327,161 +331,130 @@ namespace oczko {
 
 		}
 #pragma endregion
-	private: System::Void NewBetButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		try {
-			StartNewGame();
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show(ex->Message);
-		}
-	}
+		private: 
+			System::Void NewBetButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			try {
+				ClearBets();
 
-	private: System::Void BetsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-		UpdateBetLabel();
-		UpdateMultiplierLabel();
+				float baseBet = Single::Parse(BetTextBox->Text);
 
-		UpdatePlayerHandListBox();
-		UpdatePlayerScoreLabel();
-		UpdateHitButton();
-		UpdateStandButton();
-		UpdateDoubleButton();
-		UpdateSplitButton();
-	}
+				Withdrawal(baseBet);
 
-	private: System::Void HitButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		int selectedIndex = BetsListBox->SelectedIndex;
-
-		if (selectedIndex < 0)
-			return;
-
-		if (Bets->Count < 1)
-			return;
-
-		Bet::Bet^ bet = Bets[selectedIndex];
-
-		if (bet->IsStop())
-			return;
-
-		try {
-			bet->PlayHit(DrawCard());
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show(ex->Message);
+				AddNewBet(gcnew Bet::Bet(baseBet, Croupier->NewCroupierHand(), Croupier->NewHand()));
+				
+				BetsListBox->SelectedIndex = 0;
+			}
+			catch (Exception^ ex) {
+				MessageBox::Show(ex->Message);
+			}
 		}
 
-		UpdatePlayerHandListBox();
-		UpdatePlayerScoreLabel();
-		UpdateHitButton();
-		UpdateStandButton();
-		UpdateDoubleButton();
-		UpdateSplitButton();
-		UpdateGame();
-	}
+		private: System::Void BetsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+			UpdateBetLabel();
+			UpdateMultiplierLabel();
 
-
-	private: System::Void StandButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		int selectedIndex = BetsListBox->SelectedIndex;
-
-		if (selectedIndex < 0)
-			return;
-
-		if (Bets->Count < 1)
-			return;
-
-		Bet::Bet^ bet = Bets[selectedIndex];
-
-		if (bet->IsStop())
-			return;
-
-		bet->PlayStand();
-
-		UpdateHitButton();
-		UpdateStandButton();
-		UpdateDoubleButton();
-		UpdateSplitButton();
-		UpdateGame();
-	}
-
-	private: System::Void OldBetsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-		UpdateOldBetListBox();
-	}
-
-	private: System::Void DoubleButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		int selectedIndex = BetsListBox->SelectedIndex;
-
-		if (selectedIndex < 0)
-			return;
-
-		if (Bets->Count < 1)
-			return;
-
-		Bet::Bet^ bet = Bets[selectedIndex];
-
-		if (bet->IsHit())
-			return;
-
-		if (bet->IsStop())
-			return;
-
-		if (Player->GetMoney() < bet->GetBaseBet())
-			return;
-
-		SetPlayerMoney(Player->GetMoney() - bet->GetBaseBet());
-		try
-		{
-			bet->PlayDouble(DrawCard());
-		}
-		catch (Exception^ ex) {
-			MessageBox::Show(ex->Message);
+			UpdatePlayerHandListBox();
+			UpdatePlayerScoreLabel();
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
 		}
 
-		UpdateBetLabel();
-		UpdatePlayerHandListBox();
-		UpdatePlayerScoreLabel();
-		UpdateHitButton();
-		UpdateStandButton();
-		UpdateDoubleButton();
-		UpdateSplitButton();
-		UpdateGame();
+		private: System::Void HitButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			try {
+				if (!IsHit()) throw gcnew Exception("Wrong action!");
 
-	}
-	private: System::Void SplitButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		int selectedIndex = BetsListBox->SelectedIndex;
+				Bets[BetsListBox->SelectedIndex]->PlayHit(DrawCard());
+			}
+			catch (Exception^ ex) {
+				MessageBox::Show(ex->Message);
+			}
 
-		if (selectedIndex < 0)
-			return;
+			UpdatePlayerHandListBox();
+			UpdatePlayerScoreLabel();
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+			UpdateGame();
+		}
 
-		if (Bets->Count < 1)
-			return;
 
-		Bet::Bet^ bet = Bets[selectedIndex];
+		private: System::Void StandButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		
+			try {
+				if (!IsStand())
+					throw gcnew Exception("Wrong action!");
 
-		if (Player->GetMoney() < bet->GetBaseBet())
-			return;
+				Bets[BetsListBox->SelectedIndex]->PlayStand();
+			}
+			catch (Exception^ ex) {
+				MessageBox::Show(ex->Message);
+			}
+			
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+			UpdateGame();
+		}
 
-		if (!bet->CanSplit())
-			return;
+	
 
-		SetPlayerMoney(Player->GetMoney() - bet->GetBaseBet());
+		private: System::Void DoubleButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			try {
+				if (!IsDouble())
+					throw gcnew Exception("Wrong action!");
 
-		Hand::Hand^ croupierHand = Croupier->GetCroupierHand();
+				Withdrawal(Bets[BetsListBox->SelectedIndex]->GetBaseBet());
+				Bets[BetsListBox->SelectedIndex]->PlayDouble(DrawCard());
 
-		List<Card::Card^>^ cards = gcnew List<Card::Card^>();
-		cards->Add(bet->PlaySplit());
-		Hand::Hand^ playerHand = gcnew Hand::Hand(cards);
+			}
+			catch (Exception^ ex) {
+				MessageBox::Show(ex->Message);
+			}
 
-		Bet::Bet^ newBet = gcnew Bet::Bet(bet->GetBaseBet(), playerHand, croupierHand);
-		AddNewBet(newBet);
+			UpdateBetLabel();
+			UpdatePlayerHandListBox();
+			UpdatePlayerScoreLabel();
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+			UpdateGame();
 
-		BetsListBox->SelectedIndex = 0;
+		}
+		private: System::Void SplitButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			try {
+				if (!IsSplit())
+					throw gcnew Exception("Wrong action!");
 
-		UpdatePlayerHandListBox();
-		UpdatePlayerScoreLabel();
-		UpdateHitButton();
-		UpdateStandButton();
-		UpdateDoubleButton();
-		UpdateSplitButton();
-		UpdateGame();
-	}
+				Withdrawal(Bets[BetsListBox->SelectedIndex]->GetBaseBet());
+
+				List<Card::Card^>^ cards = gcnew List<Card::Card^>();
+				cards->Add(Bets[BetsListBox->SelectedIndex]->PlaySplit());
+
+				Bet::Bet^ newBet = gcnew Bet::Bet(Bets[BetsListBox->SelectedIndex]->GetBaseBet(), Croupier->GetCroupierHand(), gcnew Hand::Hand(cards));
+				AddNewBet(newBet);
+			}
+			catch (Exception^ ex) {
+				MessageBox::Show(ex->Message);
+			}
+
+			BetsListBox->SelectedIndex = 0;
+
+			UpdatePlayerHandListBox();
+			UpdatePlayerScoreLabel();
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+			UpdateGame();
+		}
+
+		private: System::Void OldBetsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+			UpdateOldBetListBox();
+		}
 };
 }
