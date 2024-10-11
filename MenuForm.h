@@ -11,7 +11,6 @@ namespace oczko {
 
 	public ref class MenuForm : public System::Windows::Forms::Form
 	{
-		//Constructors
 	public:
 		MenuForm(void)
 		{
@@ -19,7 +18,6 @@ namespace oczko {
 			WindowState = System::Windows::Forms::FormWindowState::Maximized;
 		}
 
-		//Destructor
 	protected:
 		~MenuForm()
 		{
@@ -29,16 +27,10 @@ namespace oczko {
 			}
 		}
 
-		//Handlers
 	private: 
 		System::Void StartButton_Click(System::Object^ sender, System::EventArgs^ e);
-
-		//Componenst
-	private: 
 		System::Windows::Forms::Button^ StartButton;
 		System::Windows::Forms::TextBox^ StartMoneyTextBox;
-
-	private:
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code

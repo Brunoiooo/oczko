@@ -2,13 +2,13 @@
 #include "GameForm.h"
 
 namespace oczko {
-	//Handlers
 	System::Void MenuForm::StartButton_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		try {
 			float startMoney = Single::Parse(StartMoneyTextBox->Text);
 
-			if (startMoney <= 0) throw gcnew System::Exception("Start money has to be bigger than 0.");
+			if (startMoney <= 0) 
+				throw gcnew System::Exception("Start money has to be bigger than 0.");
 
 			Hide();
 			GameForm^ gameForm = gcnew GameForm(startMoney);
@@ -17,8 +17,6 @@ namespace oczko {
 		catch (System::Exception^ e) {
 			MessageBox::Show(e->Message);
 		}
-		
-		return System::Void();
 	}
 }
 
