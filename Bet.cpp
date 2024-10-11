@@ -1,7 +1,7 @@
 #include "Bet.h"
 
 namespace Bet {
-	Bet::Bet(float baseBet, Hand::Hand^ playerHand, Hand::Hand^ croupierHand)
+	Bet::Bet(float baseBet, Hand::Hand^ croupierHand, Hand::Hand^ playerHand)
 	{
 		BaseBet = baseBet >= 0 ? baseBet : 0;
 		Stop = false;
@@ -72,12 +72,7 @@ namespace Bet {
 	
 	float Bet::GetMultiplier()
 	{
-		float multiplier = 2;
-
-		if ((PlayerHand->GetScore() == 21 || PlayerHand->GetScore() == 22) && PlayerHand->GetCards()->Count == 2)
-			multiplier += 0.5;
-
-		return multiplier;
+		return (PlayerHand->GetScore() == 21 || PlayerHand->GetScore() == 22) && PlayerHand->GetCards()->Count == 2 ? 2.5 : 2;
 	}
 	bool Bet::IsStop()
 	{
