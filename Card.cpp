@@ -1,5 +1,4 @@
 #include "card.h"
-#include <stdexcept>
 
 namespace Card {
 	unsigned int Card::GetColor() {
