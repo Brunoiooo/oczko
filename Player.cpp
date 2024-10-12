@@ -1,31 +1,45 @@
-#include "Player.h"
-#include <stdexcept>
+#include "Player.hpp"
 
 namespace Player {
-	Player::Player(float money) {
-		Money = 0;
-		Deposit(money);
-	}
 	float Player::GetMoney()
 	{
 		return Money;
 	}
-	bool Player::CanWithdrawal(float money)
+	void Player::Deposite(float deposite)
 	{
-		return money > 0 && Money >= money ? true : false;
-	}
-	void Player::Deposit(float money)
-	{
-		if (money < 0)
-			throw gcnew System::Exception("Money can't be less than 0!");
+		if (!CanDeposite(deposite))
+			throw new runtime_error("Deposite can't be less than 0!");
 
-		Money += money;
+		Money += deposite;
 	}
-	void Player::Player::Withdrawal(float money)
+	bool Player::CanDeposite(float deposite)
 	{
-		if (!CanWithdrawal(money))
-			throw gcnew System::Exception("Wrong value!");
+		return deposite >= 0 ? true : false;
+	}
+	void Player::Withdrawal(float withdrawal)
+	{
+		if (!CanWithdrawal(withdrawal))
+			throw new runtime_error("Deposite can't be less than 0!");
 
-		Money -= money;
+		Money -= withdrawal;
+	}
+	bool Player::CanWithdrawal(float withdrawal)
+	{
+		return withdrawal >= 0 && Money >= withdrawal ? true : false;
+	}
+	void Player::GiveBet(Bet::Bet* bet)
+	{
+		if (bet->IsStop())
+			throw new runtime_error("Bet have to be finished!");
+
+		Money += bet->GetPay();
+		Bets->push_back(bet);
+	}
+	Player::~Player()
+	{
+		for (Bet::Bet* bet : *Bets)
+			delete bet;
+
+		delete Bets;
 	}
 }
