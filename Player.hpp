@@ -29,7 +29,6 @@ namespace Player {
 
 		void GiveBet(Bet::Bet* bet);
 
-	protected:
 		~Player();
 	};
 }
