@@ -1,16 +1,29 @@
 #include "Core.hpp"
 
 namespace Core {
-	void Core::NewBet(float baseBet, Player::Player* player)
+	Player::Player* Core::GetPlayer()
 	{
-		if (!CanNewBet(baseBet, player))
+		return Player;
+	}
+	Croupier::Croupier* Core::GetCroupier()
+	{
+		return Croupier;
+	}
+	vector<Bet::Bet*>* Core::GetBets()
+	{
+		return Bets;
+	}
+	void Core::NewBet(float baseBet)
+	{
+		if (!CanNewBet(baseBet))
 			throw new runtime_error("New game can't be started!");
 
 		Bets->push_back(new Bet::Bet(baseBet, Croupier->NewGame(), Croupier));
+		Player->Withdrawal(baseBet);
 	}
-	bool Core::CanNewBet(float baseBet, Player::Player* player)
+	bool Core::CanNewBet(float baseBet)
 	{
-		return Bets->size() < 1 && player->CanWithdrawal(baseBet);
+		return Bets->size() < 1 && Player->CanWithdrawal(baseBet);
 	}
 	void Core::Hit(Bet::Bet* bet)
 	{
@@ -30,21 +43,21 @@ namespace Core {
 
 		UpdateGame();
 	}
-	void Core::Double(Bet::Bet* bet, Player::Player* player)
+	void Core::Double(Bet::Bet* bet)
 	{
-		if (!bet->CanDouble(player))
+		if (!bet->CanDouble(Player))
 			throw new runtime_error("Double can't be used!");
 
-		bet->Double(player);
+		bet->Double(Player);
 
 		UpdateGame();
 	}
-	void Core::Split(Bet::Bet* bet, Player::Player* player)
+	void Core::Split(Bet::Bet* bet)
 	{
-		if (!bet->CanSplit(player))
+		if (!bet->CanSplit(Player))
 			throw new runtime_error("Split can't be used!");
 
-		Bets->push_back(bet->Split(player));
+		Bets->push_back(bet->Split(Player));
 
 		UpdateGame();
 	}

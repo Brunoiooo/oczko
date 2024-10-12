@@ -23,16 +23,20 @@ namespace Core {
 			Croupier(new Croupier::Croupier()), 
 			Bets(new vector<Bet::Bet*>()) {}
 
-		void NewBet(float baseBet, Player::Player* player);
-		bool CanNewBet(float baseBet, Player::Player* player);
+		Player::Player* GetPlayer();
+		Croupier::Croupier* GetCroupier();
+		vector<Bet::Bet*>* GetBets();
+
+		void NewBet(float baseBet);
+		bool CanNewBet(float baseBet);
 
 		void Hit(Bet::Bet* bet);
 
 		void Stand(Bet::Bet* bet);
 
-		void Double(Bet::Bet* bet, Player::Player* player);
+		void Double(Bet::Bet* bet);
 
-		void Split(Bet::Bet* bet, Player::Player* player);
+		void Split(Bet::Bet* bet);
 
 		void UpdateGame();
 
