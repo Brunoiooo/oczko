@@ -5,6 +5,10 @@ namespace Player {
 	{
 		return Money;
 	}
+	vector<Bet::Bet*>* Player::GetBets()
+	{
+		return Bets;
+	}
 	void Player::Deposite(float deposite)
 	{
 		if (!CanDeposite(deposite))
@@ -29,7 +33,7 @@ namespace Player {
 	}
 	void Player::GiveBet(Bet::Bet* bet)
 	{
-		if (bet->IsStop())
+		if (!bet->IsStop())
 			throw new runtime_error("Bet have to be finished!");
 
 		Money += bet->GetPay();

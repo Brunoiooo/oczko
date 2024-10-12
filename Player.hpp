@@ -5,6 +5,10 @@
 #include <iostream>
 #include <stdexcept>
 
+namespace Bet {
+	class Bet;
+}
+
 namespace Player {
 	using namespace std;
 
@@ -16,10 +20,12 @@ namespace Player {
 	public:
 		Player() : Money(0), Bets(new vector<Bet::Bet*>()) {}
 		Player(float money) : Money(money), Bets(new vector<Bet::Bet*>()) {
-			if (money < 0) throw new std::runtime_error("Money can't be less than 0!");
+			if (money < 0) throw new runtime_error("Money can't be less than 0!");
 		}
 
 		float GetMoney();
+
+		vector<Bet::Bet*>* GetBets();
 
 		void Deposite(float deposite);
 		bool CanDeposite(float deposite);
