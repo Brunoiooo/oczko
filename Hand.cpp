@@ -1,35 +1,54 @@
-#include "Hand.h"
+#include "Hand.hpp"
 
 namespace Hand {
-	Hand::Hand(List<Card::Card^>^ cards)
+	void Hand::AddCard(Card::Card* card)
 	{
-		Cards = cards;
+		if (!CanAdd())
+			throw new runtime_error("Card can't be added!");
+
+		Cards->push_back(card);
 	}
 
-	List<Card::Card^>^ Hand::GetCards()
+	bool Hand::CanAdd()
 	{
-		return Cards;
+		return GetScore() > 21 && Cards->size() > 2 ? true : false;
 	}
 
-	Card::Card^ Hand::StillCard(Card::Card^ card)
+	Hand* Hand::Split()
 	{
-		Cards->Remove(card);
-		return card;
+		if (!CanSplit())
+			runtime_error("Hand can't be splited!");
+
+		vector<Card::Card*>* cards = new vector<Card::Card*>();
+		cards->push_back((*Cards)[1]);
+		Cards->pop_back();
+
+		Hand* hand = new Hand(cards);
+
+		return hand;
 	}
 
-	void Hand::AddCart(Card::Card^ card)
+	bool Hand::CanSplit()
 	{
-		Cards->Add(card);
+		return Cards->size() == 2 && (*Cards)[0]->GetValue() == (*Cards)[1]->GetValue() ? true : false;
 	}
 
-	int Hand::GetScore()
+	unsigned int Hand::GetScore()
 	{
-		int score = 0;
-		for each(Card::Card^ card in Cards) 
+		unsigned int score = 0;
+
+		for (Card::Card* card : *Cards)
 			score += card->GetValue();
-			
+
 		return score;
 	}
 
+	Hand::~Hand()
+	{
+		for (Card::Card* card : *Cards)
+			delete card;
+		
+		delete Cards;
+	}
 
 }
