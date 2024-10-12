@@ -23,7 +23,7 @@ namespace Deck {
 
 		unsigned int GetCountOfDeckCards();
 
-		void Reset();
+		void ResetDeck();
 
 	protected:
 		~Deck();

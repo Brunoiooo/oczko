@@ -23,7 +23,7 @@ namespace Deck {
 	Card::Card* Deck::DrawCard()
 	{
 		if (Cards->empty())
-			Reset();
+			ResetDeck();
 
 		uniform_real_distribution<> distrib(0, Cards->size() - 1);
 		unsigned int rand = distrib(Gen);
@@ -37,7 +37,7 @@ namespace Deck {
 	{
 		return Cards->size();
 	}
-	void Deck::Reset()
+	void Deck::ResetDeck()
 	{
 		ClearCards();
 		GenerateDeck();
