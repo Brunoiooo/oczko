@@ -20,7 +20,7 @@ namespace Deck {
 	{
 		GenerateDeck();
 	}
-	Card::Card* Deck::Draw()
+	Card::Card* Deck::DrawCard()
 	{
 		if (Cards->empty())
 			Reset();
@@ -33,7 +33,7 @@ namespace Deck {
 
 		return card;
 	}
-	unsigned int Deck::GetCountOfCards()
+	unsigned int Deck::GetCountOfDeckCards()
 	{
 		return Cards->size();
 	}

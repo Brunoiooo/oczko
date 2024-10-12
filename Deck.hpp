@@ -19,9 +19,9 @@ namespace Deck {
 	public:
 		Deck();
 
-		Card::Card* Draw();
+		Card::Card* DrawCard();
 
-		unsigned int GetCountOfCards();
+		unsigned int GetCountOfDeckCards();
 
 		void Reset();
 
