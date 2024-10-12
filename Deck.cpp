@@ -1,32 +1,49 @@
-#include "Deck.h"
-#include <stdexcept>
+#include "Deck.hpp"
 
 namespace Deck {
-	Card::Card^ Deck::Draw() {
-		if (Cards->Count < 1) Reset();
+	void Deck::GenerateDeck()
+	{
+		Cards = new vector<Card::Card*>();
 
-		Card::Card^ card = Cards[Random->Next(0, Cards->Count - 1)];
-		Cards->Remove(card);
+		for (unsigned int c = 1; c <= 4; c++)
+			for (unsigned int v = 2; v <= 11; v++)
+				Cards->push_back(new Card::Card(c, v));
+	}
+	void Deck::ClearCards()
+	{
+		for (Card::Card* card : *Cards)
+			delete card;
+
+		delete Cards;
+	}
+	Deck::Deck() : Gen(std::random_device{}())
+	{
+		GenerateDeck();
+	}
+	Card::Card* Deck::Draw()
+	{
+		if (Cards->empty())
+			Reset();
+
+		uniform_real_distribution<> distrib(0, Cards->size() - 1);
+		unsigned int rand = distrib(Gen);
+
+		Card::Card* card = (*Cards)[rand];
+		Cards->erase(Cards->begin() + 2);
 
 		return card;
 	}
-
-	unsigned int Deck::GetCountOfCards() {
-		return Cards->Count;
+	unsigned int Deck::GetCountOfCards()
+	{
+		return Cards->size();
 	}
-
 	void Deck::Reset()
 	{
-		Cards = gcnew List<Card::Card^>();
-		for (unsigned int i = 1; i <= 4; i++)
-			for (unsigned int x = 2; x <= 11; x++) 
-				Cards->Add(gcnew Card::Card(i, x));
+		ClearCards();
+		GenerateDeck();
 	}
-
-	Deck::Deck() {
-		Random = gcnew System::Random();
-		Cards = gcnew List<Card::Card^>();
-
-		Reset();
+	Deck::~Deck()
+	{
+		ClearCards();
 	}
 }
