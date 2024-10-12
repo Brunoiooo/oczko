@@ -11,7 +11,7 @@ namespace Hand {
 
 	bool Hand::CanAdd()
 	{
-		return GetScore() > 21 && Cards->size() > 2 ? true : false;
+		return GetScore() > 21 && Cards->size() > 2 ? false : true;
 	}
 
 	Hand* Hand::Split()
