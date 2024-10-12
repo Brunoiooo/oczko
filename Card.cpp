@@ -1,4 +1,4 @@
-#include "card.h"
+#include "Card.hpp"
 
 namespace Card {
 	unsigned int Card::GetColor() {
@@ -7,10 +7,5 @@ namespace Card {
 
 	unsigned int Card::GetValue() {
 		return Value;
-	}
-
-	Card::Card(unsigned int color, unsigned int value) {
-		Color = color;
-		Value = value;
 	}
 }
