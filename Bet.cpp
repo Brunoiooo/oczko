@@ -1,6 +1,10 @@
 #include "Bet.hpp"
 
 namespace Bet {
+	Hand::Hand* Bet::GetHand()
+	{
+		return PlayerHand;
+	}
 	float Bet::GetBaseBet()
 	{
 		return BaseBet;
@@ -38,7 +42,7 @@ namespace Bet {
 			throw new runtime_error("Double can't be used!");
 
 		PlayerHand->AddCard(Croupier->DrawCard());
-		player->CanWithdrawal(BaseBet);
+		player->Withdrawal(BaseBet);
 		BaseBet *= 2;
 		IsDoubled = true;
 	}

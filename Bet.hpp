@@ -5,6 +5,23 @@
 #include "Croupier.hpp"
 #include "Player.hpp"
 
+namespace Player {
+	class Player;
+}
+
+namespace Hand {
+	class Hand;
+}
+
+namespace Card {
+	class Card;
+}
+
+namespace Croupier {
+	class Croupier;
+}
+
+
 namespace Bet {
 	using namespace std;
 
@@ -40,6 +57,8 @@ namespace Bet {
 				throw std::runtime_error("Bet can't be less than 0!");
 		}
 		
+		Hand::Hand* GetHand();
+
 		float GetBaseBet();
 
 		float GetMultiplier();
