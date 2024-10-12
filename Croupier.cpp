@@ -1,39 +1,32 @@
-#include "Croupier.h"
+#include "Croupier.hpp"
 
 namespace Croupier {
-	Croupier::Croupier() {
-		Deck = gcnew Deck::Deck();
-		CroupierHand = NewHand();
-	}
-
-	Hand::Hand^ Croupier::NewHand()
+	Hand::Hand* Croupier::Croupier::NewGame()
 	{
-		List<Card::Card^>^ cards = gcnew List<Card::Card^>();
-		cards->Add(GetDeck()->Draw());
-		cards->Add(GetDeck()->Draw());
+		if (CroupierHand != nullptr)
+			throw new runtime_error("Game has been started!");
 
-		return gcnew Hand::Hand(cards);
+		Reset();
+
+		vector<Card::Card*>* croupierCards = new vector<Card::Card*>();
+		croupierCards->push_back(Draw());
+		croupierCards->push_back(Draw());
+		CroupierHand = new Hand::Hand(croupierCards);
+
+		vector<Card::Card*>* playerCards = new vector<Card::Card*>();
+		playerCards->push_back(Draw());
+		playerCards->push_back(Draw());
+
+		return new Hand::Hand(playerCards);
 	}
-
-	Hand::Hand^ Croupier::GetCroupierHand()
-	{
-		return CroupierHand;
-	}
-
-	Hand::Hand^ Croupier::NewCroupierHand()
-	{
-		Deck->Reset();
-		CroupierHand = NewHand();
-		return CroupierHand;
-	}
-
 	void Croupier::FillCroupierHand()
 	{
-		while (CroupierHand->GetScore() < 17) 
-			CroupierHand->AddCart(Deck->Draw());
-	}
+		if (CroupierHand == nullptr)
+			throw new runtime_error("Game has not been started!");
 
-	Deck::Deck^ Croupier::GetDeck() {
-		return Deck;
+		while (CroupierHand->GetScore() < 17)
+			CroupierHand->AddCard(Draw());
+
+		CroupierHand = nullptr;
 	}
 }
