@@ -29,7 +29,7 @@ namespace Deck {
 		unsigned int rand = distrib(Gen);
 
 		Card::Card* card = (*Cards)[rand];
-		Cards->erase(Cards->begin() + 2);
+		Cards->erase(Cards->begin() + rand);
 
 		return card;
 	}
