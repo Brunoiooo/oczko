@@ -43,6 +43,11 @@ namespace Hand {
 		return score;
 	}
 
+	unsigned int Hand::GetSize()
+	{
+		return Cards->size();
+	}
+
 	Hand::~Hand()
 	{
 		for (Card::Card* card : *Cards)

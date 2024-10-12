@@ -10,20 +10,20 @@ namespace Hand {
 	class Hand {
 	private:
 		vector<Card::Card*>* Cards;
+		bool CanAdd();
 
 	public:
 		Hand() : Cards(new vector<Card::Card*>()) {}
 		Hand(vector<Card::Card*>* cards) : Cards(cards) {}
 
 		void AddCard(Card::Card* card);
-		bool CanAdd();
-
+		
 		Hand* Split();
 		bool CanSplit();
 
 		unsigned int GetScore();
+		unsigned int GetSize();
 
-	protected:
 		~Hand();
 	};
 }
