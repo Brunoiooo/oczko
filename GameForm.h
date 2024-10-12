@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Deck.h"
-#include "Player.h"
-#include "Croupier.h"
-#include "Bet.h"
+#include "Card.hpp"
+#include <iostream>
+#include <vector>
 
 namespace oczko {
 
@@ -14,17 +13,18 @@ namespace oczko {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Collections::Generic;
+	using namespace std;
 
 	public ref class GameForm : public System::Windows::Forms::Form
 	{
 	private:
-		Player::Player^ Player;
+		/*Player::Player^ Player;
 		Croupier::Croupier^ Croupier;
 		List<Bet::Bet^>^ Bets;
-		List<Bet::Bet^>^ OldBets;
+		List<Bet::Bet^>^ OldBets;*/
 
 	private:
-		void Deposit(float money);
+		/*void Deposit(float money);
 		void Withdrawal(float money);
 
 		Card::Card^ DrawCard();
@@ -35,17 +35,17 @@ namespace oczko {
 		void AddNewBet(Bet::Bet^ bet);
 		void ClearBets();
 		
-		void AddOldBet(Bet::Bet^ bet);
+		void AddOldBet(Bet::Bet^ bet);*/
 
 	private:
-		bool IsHit();
+		/*bool IsHit();
 		bool IsStand();
 		bool IsDouble();
 		bool IsSplit();
-		bool IsBet();
+		bool IsBet();*/
 
 	private:
-		void UpdatePlayerMoneyLabel();
+		/*void UpdatePlayerMoneyLabel();
 		void UpdateNewBetButton();
 		void UpdateBetTextBox();
 		void UpdateOldBetsListBox();
@@ -62,7 +62,7 @@ namespace oczko {
 		void UpdateStandButton();
 		void UpdateDoubleButton();
 		void UpdateSplitButton();
-		void UpdateGame();
+		void UpdateGame();*/
 
 	public:
 		GameForm(float money)
@@ -71,12 +71,14 @@ namespace oczko {
 
 			WindowState = System::Windows::Forms::FormWindowState::Maximized;
 
-			Player = gcnew Player::Player(money);
+			
+
+			/*Player = gcnew Player::Player(money);
 			Croupier = gcnew Croupier::Croupier();
 			Bets = gcnew List<Bet::Bet^>();
-			OldBets = gcnew List<Bet::Bet^>();
+			OldBets = gcnew List<Bet::Bet^>();*/
 
-			PlayerMoneyLabel->Text = Player->GetMoney().ToString();
+			/*PlayerMoneyLabel->Text = Player->GetMoney().ToString();
 			MultiplierLabel->Hide();
 			CardCountLabel->Hide();
 			BetLabel->Hide();
@@ -88,7 +90,7 @@ namespace oczko {
 			StandButton->Hide();
 			DoubleButton->Hide();
 			SplitButton->Hide();
-			OldBetListBox->Hide();
+			OldBetListBox->Hide();*/
 		}
 
 	protected:
@@ -150,7 +152,7 @@ namespace oczko {
 			this->BetsListBox->Name = L"BetsListBox";
 			this->BetsListBox->Size = System::Drawing::Size(144, 260);
 			this->BetsListBox->TabIndex = 0;
-			this->BetsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::BetsListBox_SelectedIndexChanged);
+			//this->BetsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::BetsListBox_SelectedIndexChanged);
 			// 
 			// BetTextBox
 			// 
@@ -168,7 +170,7 @@ namespace oczko {
 			this->NewBetButton->TabIndex = 2;
 			this->NewBetButton->Text = L"New Bet";
 			this->NewBetButton->UseVisualStyleBackColor = true;
-			this->NewBetButton->Click += gcnew System::EventHandler(this, &GameForm::NewBetButton_Click);
+			//this->NewBetButton->Click += gcnew System::EventHandler(this, &GameForm::NewBetButton_Click);
 			// 
 			// CroupierHandListBox
 			// 
@@ -196,7 +198,7 @@ namespace oczko {
 			this->HitButton->TabIndex = 5;
 			this->HitButton->Text = L"Hit";
 			this->HitButton->UseVisualStyleBackColor = true;
-			this->HitButton->Click += gcnew System::EventHandler(this, &GameForm::HitButton_Click);
+			//this->HitButton->Click += gcnew System::EventHandler(this, &GameForm::HitButton_Click);
 			// 
 			// StandButton
 			// 
@@ -206,7 +208,7 @@ namespace oczko {
 			this->StandButton->TabIndex = 6;
 			this->StandButton->Text = L"Stand";
 			this->StandButton->UseVisualStyleBackColor = true;
-			this->StandButton->Click += gcnew System::EventHandler(this, &GameForm::StandButton_Click);
+			//this->StandButton->Click += gcnew System::EventHandler(this, &GameForm::StandButton_Click);
 			// 
 			// DoubleButton
 			// 
@@ -216,7 +218,7 @@ namespace oczko {
 			this->DoubleButton->TabIndex = 7;
 			this->DoubleButton->Text = L"Double";
 			this->DoubleButton->UseVisualStyleBackColor = true;
-			this->DoubleButton->Click += gcnew System::EventHandler(this, &GameForm::DoubleButton_Click);
+			//this->DoubleButton->Click += gcnew System::EventHandler(this, &GameForm::DoubleButton_Click);
 			// 
 			// SplitButton
 			// 
@@ -226,7 +228,7 @@ namespace oczko {
 			this->SplitButton->TabIndex = 8;
 			this->SplitButton->Text = L"Split";
 			this->SplitButton->UseVisualStyleBackColor = true;
-			this->SplitButton->Click += gcnew System::EventHandler(this, &GameForm::SplitButton_Click);
+			//this->SplitButton->Click += gcnew System::EventHandler(this, &GameForm::SplitButton_Click);
 			// 
 			// BetLabel
 			// 
@@ -291,7 +293,7 @@ namespace oczko {
 			this->OldBetsListBox->Name = L"OldBetsListBox";
 			this->OldBetsListBox->Size = System::Drawing::Size(144, 260);
 			this->OldBetsListBox->TabIndex = 17;
-			this->OldBetsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::OldBetsListBox_SelectedIndexChanged);
+			//this->OldBetsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::OldBetsListBox_SelectedIndexChanged);
 			// 
 			// OldBetListBox
 			// 
@@ -331,7 +333,7 @@ namespace oczko {
 
 		}
 #pragma endregion
-		private: 
+		/*private: 
 			System::Void NewBetButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			try {
 				ClearBets();
@@ -455,6 +457,6 @@ namespace oczko {
 
 		private: System::Void OldBetsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 			UpdateOldBetListBox();
-		}
+		}*/
 };
 }
