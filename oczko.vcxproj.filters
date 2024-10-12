@@ -37,6 +37,9 @@
     <Filter Include="Game\Bet">
       <UniqueIdentifier>{67f7e266-d7a5-4442-9979-a2e934be757d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Core">
+      <UniqueIdentifier>{ada7b082-d961-45ba-9675-ca6cd4eafa05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,15 +47,6 @@
     </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Game\Card</Filter>
-    </ClCompile>
-    <ClCompile Include="Deck.cpp">
-      <Filter>Game\Deck</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Croupier.cpp">
-      <Filter>Game\Croupier</Filter>
     </ClCompile>
     <ClCompile Include="MenuForm.cpp">
       <Filter>Pliki nagłówkowe</Filter>
@@ -63,34 +57,49 @@
     <ClCompile Include="Hand.cpp">
       <Filter>Game\Hand</Filter>
     </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>Game\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="Croupier.cpp">
+      <Filter>Game\Croupier</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
     <ClCompile Include="Bet.cpp">
       <Filter>Game\Bet</Filter>
     </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Game\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Deck.h">
-      <Filter>Game\Deck</Filter>
-    </ClInclude>
-    <ClInclude Include="Card.h">
-      <Filter>Game\Card</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Croupier.h">
-      <Filter>Game\Croupier</Filter>
-    </ClInclude>
     <ClInclude Include="MenuForm.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="GameForm.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Hand.h">
+    <ClInclude Include="Core.hpp">
+      <Filter>Game\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Bet.hpp">
+      <Filter>Game\Bet</Filter>
+    </ClInclude>
+    <ClInclude Include="Hand.hpp">
       <Filter>Game\Hand</Filter>
     </ClInclude>
-    <ClInclude Include="Bet.h">
-      <Filter>Game\Bet</Filter>
+    <ClInclude Include="Card.hpp">
+      <Filter>Game\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="Croupier.hpp">
+      <Filter>Game\Croupier</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.hpp">
+      <Filter>Game\Deck</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
