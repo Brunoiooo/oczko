@@ -13,6 +13,7 @@ namespace Croupier {
 
 	public:
 		Croupier() : Deck::Deck(), CroupierHand(nullptr) {}
+		Hand::Hand* GetCroupierHand();
 		Hand::Hand* NewGame();
 		void FillCroupierHand();
 	};

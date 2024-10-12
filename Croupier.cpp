@@ -1,6 +1,10 @@
 #include "Croupier.hpp"
 
 namespace Croupier {
+	Hand::Hand* Croupier::GetCroupierHand()
+	{
+		return CroupierHand;
+	}
 	Hand::Hand* Croupier::Croupier::NewGame()
 	{
 		if (CroupierHand != nullptr)
@@ -9,13 +13,13 @@ namespace Croupier {
 		Reset();
 
 		vector<Card::Card*>* croupierCards = new vector<Card::Card*>();
-		croupierCards->push_back(Draw());
-		croupierCards->push_back(Draw());
+		croupierCards->push_back(DrawCard());
+		croupierCards->push_back(DrawCard());
 		CroupierHand = new Hand::Hand(croupierCards);
 
 		vector<Card::Card*>* playerCards = new vector<Card::Card*>();
-		playerCards->push_back(Draw());
-		playerCards->push_back(Draw());
+		playerCards->push_back(DrawCard());
+		playerCards->push_back(DrawCard());
 
 		return new Hand::Hand(playerCards);
 	}
@@ -25,7 +29,7 @@ namespace Croupier {
 			throw new runtime_error("Game has not been started!");
 
 		while (CroupierHand->GetScore() < 17)
-			CroupierHand->AddCard(Draw());
+			CroupierHand->AddCard(DrawCard());
 
 		CroupierHand = nullptr;
 	}
