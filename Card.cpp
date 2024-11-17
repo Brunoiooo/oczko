@@ -2,10 +2,10 @@
 
 namespace Card {
 	unsigned int Card::GetColor() {
-		return Color;
+		return color;
 	}
 
 	unsigned int Card::GetValue() {
-		return Value;
+		return value;
 	}
 }
