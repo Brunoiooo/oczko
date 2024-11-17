@@ -24,6 +24,8 @@ namespace Hand {
 		unsigned int GetScore();
 		unsigned int GetSize();
 
+		vector<Card::Card*>* GetCards();
+
 		~Hand();
 	};
 }

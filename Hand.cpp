@@ -48,6 +48,11 @@ namespace Hand {
 		return Cards->size();
 	}
 
+	vector<Card::Card*>* Hand::GetCards()
+	{
+		return Cards;
+	}
+
 	Hand::~Hand()
 	{
 		for (Card::Card* card : *Cards)
