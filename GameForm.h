@@ -17,6 +17,10 @@ namespace oczko {
 	{
 	private:
 		Core::Core* core;
+		void UpdateComponents();
+		void UpdateStartBetButton();
+		void UpdateStartBetLabel();
+		void UpdateStartBetTextbox();
 
 	public:
 		GameForm(float money)
@@ -24,6 +28,8 @@ namespace oczko {
 			core = new Core::Core(money);
 
 			InitializeComponent();
+
+			UpdateComponents();
 
 			WindowState = System::Windows::Forms::FormWindowState::Maximized;
 		}
@@ -42,7 +48,6 @@ namespace oczko {
 
 		System::ComponentModel::Container^ components;
 
-
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
@@ -50,6 +55,7 @@ namespace oczko {
 			this->start_bet_button = (gcnew System::Windows::Forms::Button());
 			this->start_bet_textbox = (gcnew System::Windows::Forms::TextBox());
 			this->start_bet_label = (gcnew System::Windows::Forms::Label());
+			this->player_money_label = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// start_bet_button
@@ -105,9 +111,7 @@ namespace oczko {
 			
 			core->NewBet(money);
 
-			start_bet_label->Hide();
-			start_bet_textbox->Hide();
-			start_bet_button->Hide();
+			UpdateComponents();
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);
