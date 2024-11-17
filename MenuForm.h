@@ -36,6 +36,7 @@ namespace oczko {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MenuForm::typeid));
 			this->StartButton = (gcnew System::Windows::Forms::Button());
 			this->StartMoneyTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
@@ -63,8 +64,9 @@ namespace oczko {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1742, 833);
-			this->Controls->Add(StartMoneyTextBox);
-			this->Controls->Add(StartButton);
+			this->Controls->Add(this->StartMoneyTextBox);
+			this->Controls->Add(this->StartButton);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MenuForm";
 			this->Text = L"MenuForm";
 			this->ResumeLayout(false);

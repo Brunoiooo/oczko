@@ -43,6 +43,7 @@ namespace oczko {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameForm::typeid));
 			this->SuspendLayout();
 			// 
 			// GameForm
@@ -50,6 +51,7 @@ namespace oczko {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1787, 777);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"GameForm";
 			this->Text = L"GameForm";
 			this->ResumeLayout(false);
