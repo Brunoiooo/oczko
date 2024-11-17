@@ -55,7 +55,6 @@ namespace oczko {
 			this->start_bet_button = (gcnew System::Windows::Forms::Button());
 			this->start_bet_textbox = (gcnew System::Windows::Forms::TextBox());
 			this->start_bet_label = (gcnew System::Windows::Forms::Label());
-			this->player_money_label = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// start_bet_button
