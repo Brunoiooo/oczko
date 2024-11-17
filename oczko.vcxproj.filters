@@ -40,6 +40,9 @@
     <Filter Include="Game\Core">
       <UniqueIdentifier>{ada7b082-d961-45ba-9675-ca6cd4eafa05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki zasobów\cards">
+      <UniqueIdentifier>{3a75dd22-d0cb-4d2e-a34b-010591bb6298}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -105,6 +108,126 @@
   <ItemGroup>
     <Image Include="icon.ico">
       <Filter>Pliki zasobów\icons</Filter>
+    </Image>
+    <Image Include="cards\33.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\34.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\35.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\36.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\37.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\38.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\39.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\42.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\43.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\44.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\45.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\46.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\47.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\48.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\49.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\110.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\111.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\210.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\211.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\310.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\311.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\410.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\411.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\12.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\13.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\14.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\15.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\16.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\17.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\18.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\19.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\22.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\23.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\24.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\25.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\26.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\27.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\28.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\29.png">
+      <Filter>Pliki zasobów\cards</Filter>
+    </Image>
+    <Image Include="cards\32.png">
+      <Filter>Pliki zasobów\cards</Filter>
     </Image>
   </ItemGroup>
 </Project>

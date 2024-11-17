@@ -147,6 +147,46 @@
     <ClInclude Include="Player.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="cards\110.png" />
+    <Image Include="cards\111.png" />
+    <Image Include="cards\12.png" />
+    <Image Include="cards\13.png" />
+    <Image Include="cards\14.png" />
+    <Image Include="cards\15.png" />
+    <Image Include="cards\16.png" />
+    <Image Include="cards\17.png" />
+    <Image Include="cards\18.png" />
+    <Image Include="cards\19.png" />
+    <Image Include="cards\210.png" />
+    <Image Include="cards\211.png" />
+    <Image Include="cards\22.png" />
+    <Image Include="cards\23.png" />
+    <Image Include="cards\24.png" />
+    <Image Include="cards\25.png" />
+    <Image Include="cards\26.png" />
+    <Image Include="cards\27.png" />
+    <Image Include="cards\28.png" />
+    <Image Include="cards\29.png" />
+    <Image Include="cards\310.png" />
+    <Image Include="cards\311.png" />
+    <Image Include="cards\32.png" />
+    <Image Include="cards\33.png" />
+    <Image Include="cards\34.png" />
+    <Image Include="cards\35.png" />
+    <Image Include="cards\36.png" />
+    <Image Include="cards\37.png" />
+    <Image Include="cards\38.png" />
+    <Image Include="cards\39.png" />
+    <Image Include="cards\410.png" />
+    <Image Include="cards\411.png" />
+    <Image Include="cards\42.png" />
+    <Image Include="cards\43.png" />
+    <Image Include="cards\44.png" />
+    <Image Include="cards\45.png" />
+    <Image Include="cards\46.png" />
+    <Image Include="cards\47.png" />
+    <Image Include="cards\48.png" />
+    <Image Include="cards\49.png" />
     <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
