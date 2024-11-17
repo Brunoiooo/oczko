@@ -21,6 +21,7 @@ namespace oczko {
 		void UpdateStartBetButton();
 		void UpdateStartBetLabel();
 		void UpdateStartBetTextbox();
+		void UpdatePlayerWalletLabel();
 
 	public:
 		GameForm(float money)
@@ -45,6 +46,7 @@ namespace oczko {
 	private: System::Windows::Forms::Button^ start_bet_button;
 	private: System::Windows::Forms::TextBox^ start_bet_textbox;
 	private: System::Windows::Forms::Label^ start_bet_label;
+	private: System::Windows::Forms::Label^ player_wallet_label;
 
 		System::ComponentModel::Container^ components;
 
@@ -55,6 +57,7 @@ namespace oczko {
 			this->start_bet_button = (gcnew System::Windows::Forms::Button());
 			this->start_bet_textbox = (gcnew System::Windows::Forms::TextBox());
 			this->start_bet_label = (gcnew System::Windows::Forms::Label());
+			this->player_wallet_label = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// start_bet_button
@@ -83,11 +86,20 @@ namespace oczko {
 			this->start_bet_label->TabIndex = 2;
 			this->start_bet_label->Text = L"Value of next bet";
 			// 
+			// player_wallet_label
+			// 
+			this->player_wallet_label->AutoSize = true;
+			this->player_wallet_label->Location = System::Drawing::Point(12, 9);
+			this->player_wallet_label->Name = L"player_wallet_label";
+			this->player_wallet_label->Size = System::Drawing::Size(0, 16);
+			this->player_wallet_label->TabIndex = 3;
+			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1787, 777);
+			this->Controls->Add(this->player_wallet_label);
 			this->Controls->Add(this->start_bet_label);
 			this->Controls->Add(this->start_bet_textbox);
 			this->Controls->Add(this->start_bet_button);

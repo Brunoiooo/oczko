@@ -6,6 +6,7 @@ namespace oczko {
 		UpdateStartBetButton();
 		UpdateStartBetLabel();
 		UpdateStartBetTextbox();
+		UpdatePlayerWalletLabel();
 	}
 	void GameForm::UpdateStartBetButton()
 	{
@@ -27,5 +28,9 @@ namespace oczko {
 			start_bet_textbox->Hide();
 		else
 			start_bet_textbox->Show();
+	}
+	void GameForm::UpdatePlayerWalletLabel()
+	{
+		player_wallet_label->Text = "Wallet: " + core->GetPlayer()->GetMoney();
 	}
 }
