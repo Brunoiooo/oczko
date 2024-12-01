@@ -18,7 +18,7 @@ namespace Core {
 		if (!CanNewBet(baseBet))
 			throw new runtime_error("New game can't be started!");
 
-		Bets->push_back(new Bet::Bet(baseBet, Croupier->NewGame(), Croupier));
+		Bets->push_back(new Bet::Bet(baseBet, Croupier->NewGame(), Croupier->GetCroupierHand()));
 		Player->Withdrawal(baseBet);
 	}
 	bool Core::CanNewBet(float baseBet)
@@ -30,7 +30,7 @@ namespace Core {
 		if (!bet->CanHit())
 			throw new runtime_error("Hit can't be used!");
 
-		bet->Hit();
+		bet->Hit(Croupier->DrawCard());
 
 		UpdateGame();
 	}
@@ -48,7 +48,7 @@ namespace Core {
 		if (!bet->CanDouble(Player))
 			throw new runtime_error("Double can't be used!");
 
-		bet->Double(Player);
+		bet->Double(Player, Croupier->DrawCard());
 
 		UpdateGame();
 	}
