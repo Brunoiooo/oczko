@@ -120,6 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AboutMeFormh.cpp" />
     <ClCompile Include="Bet.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -132,6 +133,9 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AboutMeFormh.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Bet.hpp" />
     <ClInclude Include="Card.hpp" />
     <ClInclude Include="Core.hpp" />

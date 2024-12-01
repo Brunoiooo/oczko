@@ -75,6 +75,9 @@
     <ClCompile Include="Core.cpp">
       <Filter>Game\Core</Filter>
     </ClCompile>
+    <ClCompile Include="AboutMeFormh.cpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuForm.h">
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="Deck.hpp">
       <Filter>Game\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutMeFormh.h">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
