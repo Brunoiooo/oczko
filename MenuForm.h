@@ -32,6 +32,12 @@ namespace oczko {
 		System::Windows::Forms::Button^ StartButton;
 		System::Windows::Forms::TextBox^ StartMoneyTextBox;
 	private: System::Windows::Forms::Label^ start_money_label;
+	private: System::Windows::Forms::MenuStrip^ menu_strip;
+
+	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ helpToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ aboutMeToolStripMenuItem;
+
 
 		   System::ComponentModel::Container^ components;
 
@@ -42,6 +48,11 @@ namespace oczko {
 			this->StartButton = (gcnew System::Windows::Forms::Button());
 			this->StartMoneyTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->start_money_label = (gcnew System::Windows::Forms::Label());
+			this->menu_strip = (gcnew System::Windows::Forms::MenuStrip());
+			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutMeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menu_strip->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// StartButton
@@ -71,6 +82,41 @@ namespace oczko {
 			this->start_money_label->TabIndex = 2;
 			this->start_money_label->Text = L"Start money";
 			// 
+			// menu_strip
+			// 
+			this->menu_strip->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menu_strip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->exitToolStripMenuItem,
+					this->helpToolStripMenuItem
+			});
+			this->menu_strip->Location = System::Drawing::Point(0, 0);
+			this->menu_strip->Name = L"menu_strip";
+			this->menu_strip->Size = System::Drawing::Size(1742, 34);
+			this->menu_strip->TabIndex = 3;
+			// 
+			// exitToolStripMenuItem
+			// 
+			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(56, 30);
+			this->exitToolStripMenuItem->Text = L"Exit";
+			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MenuForm::exitToolStripMenuItem_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {
+				this->aboutMeToolStripMenuItem
+			});
+			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
+			this->helpToolStripMenuItem->Size = System::Drawing::Size(62, 30);
+			this->helpToolStripMenuItem->Text = L"Help";
+			// 
+			// aboutMeToolStripMenuItem
+			// 
+			this->aboutMeToolStripMenuItem->Name = L"aboutMeToolStripMenuItem";
+			this->aboutMeToolStripMenuItem->Size = System::Drawing::Size(224, 30);
+			this->aboutMeToolStripMenuItem->Text = L"About me";
+			this->aboutMeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MenuForm::aboutMeToolStripMenuItem_Click);
+			// 
 			// MenuForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -80,13 +126,19 @@ namespace oczko {
 			this->Controls->Add(this->start_money_label);
 			this->Controls->Add(this->StartMoneyTextBox);
 			this->Controls->Add(this->StartButton);
+			this->Controls->Add(this->menu_strip);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menu_strip;
 			this->Name = L"MenuForm";
 			this->Text = L"MenuForm";
+			this->menu_strip->ResumeLayout(false);
+			this->menu_strip->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void aboutMeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+};
 }

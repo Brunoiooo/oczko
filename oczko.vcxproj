@@ -120,7 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AboutMeFormh.cpp" />
+    <ClCompile Include="AboutMeForm.cpp" />
     <ClCompile Include="Bet.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -133,7 +133,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutMeFormh.h">
+    <ClInclude Include="AboutMeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Bet.hpp" />
@@ -194,6 +194,9 @@
     <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutMeForm.resx">
+      <DependentUpon>AboutMeForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.h</DependentUpon>
     </EmbeddedResource>
