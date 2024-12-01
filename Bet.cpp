@@ -5,6 +5,10 @@ namespace Bet {
 	{
 		return PlayerHand;
 	}
+	Hand::Hand* Bet::GetCroupierHand()
+	{
+		return CroupierHand;
+	}
 	float Bet::GetBaseBet()
 	{
 		return BaseBet;
@@ -13,12 +17,12 @@ namespace Bet {
 	{
 		return PlayerHand->GetScore() >= 21 && PlayerHand->GetSize() == 2 && !IsSplited ? 2.5 : 2;
 	}
-	void Bet::Hit()
+	void Bet::Hit(Card::Card* card)
 	{
 		if (!CanHit())
 			throw new runtime_error("Hit can't be used!");
 
-		PlayerHand->AddCard(Croupier->DrawCard());
+		PlayerHand->AddCard(card);
 		IsHitted = true;
 	}
 	bool Bet::CanHit()
@@ -36,12 +40,12 @@ namespace Bet {
 	{
 		return !IsStop();
 	}
-	void Bet::Double(Player::Player* player)
+	void Bet::Double(Player::Player* player, Card::Card* card)
 	{
 		if (!CanDouble(player))
 			throw new runtime_error("Double can't be used!");
 
-		PlayerHand->AddCard(Croupier->DrawCard());
+		PlayerHand->AddCard(card);
 		player->Withdrawal(BaseBet);
 		BaseBet *= 2;
 		IsDoubled = true;
@@ -55,7 +59,7 @@ namespace Bet {
 		if (!CanSplit(player))
 			throw new runtime_error("Split can't be used!");
 
-		Bet* bet = new Bet(BaseBet, PlayerHand->Split(), Croupier, true);
+		Bet* bet = new Bet(BaseBet, PlayerHand->Split(), CroupierHand, true);
 
 		player->Withdrawal(BaseBet);
 		IsSplited = true;
@@ -90,10 +94,10 @@ namespace Bet {
 		if (PlayerHand->GetScore() > 21 && PlayerHand->GetSize() > 2)
 			return false;
 
-		if (Croupier->GetCroupierHand()->GetScore() > 21 && Croupier->GetCroupierHand()->GetSize() > 2)
+		if (CroupierHand->GetScore() > 21 && CroupierHand->GetSize() > 2)
 			return true;
 
-		if (Croupier->GetCroupierHand()->GetScore() < PlayerHand->GetScore())
+		if (CroupierHand->GetScore() < PlayerHand->GetScore())
 			return true;
 
 		return false;
@@ -106,10 +110,10 @@ namespace Bet {
 		if (PlayerHand->GetScore() > 21 && PlayerHand->GetSize() > 2)
 			return true;
 
-		if (Croupier->GetCroupierHand()->GetScore() > 21 && Croupier->GetCroupierHand()->GetSize() > 2)
+		if (CroupierHand->GetScore() > 21 && CroupierHand->GetSize() > 2)
 			return false;
 
-		if (Croupier->GetCroupierHand()->GetScore() > PlayerHand->GetScore())
+		if (CroupierHand->GetScore() > PlayerHand->GetScore())
 			return true;
 
 		return false;
@@ -137,6 +141,6 @@ namespace Bet {
 	Bet::~Bet()
 	{
 		delete PlayerHand;
-		delete Croupier;
+		delete CroupierHand;
 	}
 }

@@ -29,16 +29,16 @@ namespace Bet {
 	private:
 		float BaseBet;
 		Hand::Hand* PlayerHand;
-		Croupier::Croupier* Croupier;
+		Hand::Hand* CroupierHand;
 		bool IsHitted;
 		bool IsStanded;
 		bool IsDoubled;
 		bool IsSplited;
 
 	public:
-		Bet(float baseBet, Hand::Hand* playerHand, Croupier::Croupier* croupier) : BaseBet(baseBet), 
+		Bet(float baseBet, Hand::Hand* playerHand, Hand::Hand* croupierHand) : BaseBet(baseBet),
 			PlayerHand(playerHand), 
-			Croupier(croupier),
+			CroupierHand(croupierHand),
 			IsHitted(false),
 			IsStanded(false),
 			IsDoubled(false),
@@ -46,9 +46,9 @@ namespace Bet {
 			if(baseBet < 0)
 				throw std::runtime_error("Bet can't be less than 0!");
 		}
-		Bet(float baseBet, Hand::Hand* playerHand, Croupier::Croupier* croupier, bool IsSplited) : BaseBet(baseBet), 
+		Bet(float baseBet, Hand::Hand* playerHand, Hand::Hand* croupierHand, bool IsSplited) : BaseBet(baseBet),
 			PlayerHand(playerHand), 
-			Croupier(croupier), 
+			CroupierHand(croupierHand),
 			IsHitted(false),
 			IsStanded(false),
 			IsDoubled(false),
@@ -59,17 +59,19 @@ namespace Bet {
 		
 		Hand::Hand* GetHand();
 
+		Hand::Hand* GetCroupierHand();
+
 		float GetBaseBet();
 
 		float GetMultiplier();
 
-		void Hit();
+		void Hit(Card::Card* card);
 		bool CanHit();
 
 		void Stand();
 		bool CanStand();
 
-		void Double(Player::Player* player);
+		void Double(Player::Player* player, Card::Card* card);
 		bool CanDouble(Player::Player* player);
 
 		Bet* Split(Player::Player* player);
