@@ -138,4 +138,212 @@ namespace oczko {
 		else if (player_hands_listbox->SelectedIndex >= 0)
 			croupier_hand_score_label->Text = "Score: " + (core->GetBets()->at(player_hands_listbox->SelectedIndex)->GetCroupierHand()->GetCards()->at(0)->GetValue()).ToString();
 	}
+	System::Void GameForm::start_bet_button_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		try {
+			float money = float::Parse(start_bet_textbox->Text);
+
+			if (money <= 0)
+				throw gcnew Exception("Value of bet have to be bigger than 0.");
+			if (!core->CanNewBet(money))
+				throw gcnew Exception("Player doesn't have enough money to place the bet.");
+
+			core->NewBet(money);
+
+			UpdateEverything(true);
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
+	System::Void GameForm::player_bets_listbox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+		try {
+			player_hands_listbox->SelectedIndex = -1;
+
+			UpdatePlayerHandListview();
+			UpdateCroupierHandListview();
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+
+			UpdateBaseBetLabel();
+
+			UpdatePlayerHandScore();
+			UpdateCroupierHandScore();
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
+	System::Void GameForm::player_hands_listbox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+		try {
+			player_bets_listbox->SelectedIndex = -1;
+
+			UpdatePlayerHandListview();
+			UpdateCroupierHandListview();
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+
+			UpdateBaseBetLabel();
+
+			UpdatePlayerHandScore();
+			UpdateCroupierHandScore();
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
+	System::Void GameForm::player_hand_listview_DrawItem(System::Object^ sender, System::Windows::Forms::DrawListViewItemEventArgs^ e)
+	{
+		try {
+			if (e->ItemIndex < 0)
+				return;
+
+			e->DrawBackground();
+
+			String^ imagePath = Path::Combine("cards/", e->Item->Text + ".png");
+			Image^ image = Image::FromFile(imagePath);
+			e->Graphics->DrawImage(image, e->Bounds.X, e->Bounds.Y, 100, 100);
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
+	System::Void GameForm::hit_button_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		try {
+			core->Hit(core->GetBets()->at(player_hands_listbox->SelectedIndex));
+
+			UpdatePlayerBetsListbox();
+			UpdatePlayerHandsListbox(core->GetBets()->size() > 0 ? false : true);
+
+			UpdatePlayerHandListview();
+			UpdateCroupierHandListview();
+
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+
+			UpdateStartBetButton();
+			UpdateStartBetLabel();
+			UpdateStartBetTextbox();
+
+			UpdateBaseBetLabel();
+
+			UpdatePlayerHandScore();
+			UpdateCroupierHandScore();
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
+	System::Void GameForm::stand_button_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		try {
+			core->Stand(core->GetBets()->at(player_hands_listbox->SelectedIndex));
+
+			UpdatePlayerBetsListbox();
+			UpdatePlayerHandsListbox(true);
+
+			UpdatePlayerHandListview();
+			UpdateCroupierHandListview();
+
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+
+			UpdateStartBetButton();
+			UpdateStartBetLabel();
+			UpdateStartBetTextbox();
+
+			UpdateBaseBetLabel();
+
+			UpdatePlayerHandScore();
+			UpdateCroupierHandScore();
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
+	System::Void GameForm::double_button_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		try {
+			core->Double(core->GetBets()->at(player_hands_listbox->SelectedIndex));
+
+			UpdatePlayerBetsListbox();
+			UpdatePlayerHandsListbox(true);
+
+			UpdatePlayerHandListview();
+			UpdateCroupierHandListview();
+
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+
+			UpdateStartBetButton();
+			UpdateStartBetLabel();
+			UpdateStartBetTextbox();
+
+			UpdateBaseBetLabel();
+
+			UpdatePlayerHandScore();
+			UpdateCroupierHandScore();
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
+	System::Void GameForm::split_button_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		try {
+			core->Split(core->GetBets()->at(player_hands_listbox->SelectedIndex));
+
+			UpdatePlayerBetsListbox();
+			UpdatePlayerHandsListbox(true);
+
+			UpdatePlayerHandListview();
+			UpdateCroupierHandListview();
+
+			UpdateHitButton();
+			UpdateStandButton();
+			UpdateDoubleButton();
+			UpdateSplitButton();
+
+			UpdateStartBetButton();
+			UpdateStartBetLabel();
+			UpdateStartBetTextbox();
+
+			UpdateBaseBetLabel();
+
+			UpdatePlayerHandScore();
+			UpdateCroupierHandScore();
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
+	System::Void GameForm::croupier_hand_listview_DrawItem(System::Object^ sender, System::Windows::Forms::DrawListViewItemEventArgs^ e)
+	{
+		try {
+			if (e->ItemIndex < 0)
+				return;
+
+			e->DrawBackground();
+
+			String^ imagePath = Path::Combine("cards/", e->Item->Text + ".png");
+			Image^ image = Image::FromFile(imagePath);
+			e->Graphics->DrawImage(image, e->Bounds.X, e->Bounds.Y, 100, 100);
+		}
+		catch (Exception^ e) {
+			MessageBox::Show(e->Message);
+		}
+	}
 }

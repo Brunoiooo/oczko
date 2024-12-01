@@ -5,10 +5,12 @@
 #include <vector>
 #include <random>
 
-namespace Deck {
+namespace Deck 
+{
 	using namespace std;
 
-	class Deck {
+	class Deck 
+	{
 	private:
 		vector<Card::Card*>* Cards;
 		mt19937 Gen;

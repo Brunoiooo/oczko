@@ -5,27 +5,33 @@
 #include "Croupier.hpp"
 #include "Player.hpp"
 
-namespace Player {
+namespace Player 
+{
 	class Player;
 }
 
-namespace Hand {
+namespace Hand 
+{
 	class Hand;
 }
 
-namespace Card {
+namespace Card 
+{
 	class Card;
 }
 
-namespace Croupier {
+namespace Croupier 
+{
 	class Croupier;
 }
 
 
-namespace Bet {
+namespace Bet 
+{
 	using namespace std;
 
-	class Bet {
+	class Bet 
+	{
 	private:
 		float BaseBet;
 		Hand::Hand* PlayerHand;
@@ -42,7 +48,8 @@ namespace Bet {
 			IsHitted(false),
 			IsStanded(false),
 			IsDoubled(false),
-			IsSplited(false) {
+			IsSplited(false) 
+		{
 			if(baseBet < 0)
 				throw std::runtime_error("Bet can't be less than 0!");
 		}
@@ -52,7 +59,8 @@ namespace Bet {
 			IsHitted(false),
 			IsStanded(false),
 			IsDoubled(false),
-			IsSplited(IsSplited) {
+			IsSplited(IsSplited) 
+		{
 			if (baseBet < 0) 
 				throw std::runtime_error("Bet can't be less than 0!");
 		}

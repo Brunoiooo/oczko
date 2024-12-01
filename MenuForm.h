@@ -22,24 +22,18 @@ namespace oczko {
 		~MenuForm()
 		{
 			if (components)
-			{
 				delete components;
-			}
 		}
 
-	private: 
-		System::Void StartButton_Click(System::Object^ sender, System::EventArgs^ e);
-		System::Windows::Forms::Button^ StartButton;
-		System::Windows::Forms::TextBox^ StartMoneyTextBox;
+	private: System::Void StartButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Windows::Forms::Button^ StartButton;
+	private: System::Windows::Forms::TextBox^ StartMoneyTextBox;
 	private: System::Windows::Forms::Label^ start_money_label;
 	private: System::Windows::Forms::MenuStrip^ menu_strip;
-
 	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ aboutMeToolStripMenuItem;
-
-
-		   System::ComponentModel::Container^ components;
+	private: System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
@@ -139,6 +133,6 @@ namespace oczko {
 		}
 #pragma endregion
 	private: System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void aboutMeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void aboutMeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

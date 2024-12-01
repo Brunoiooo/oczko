@@ -4,10 +4,12 @@
 #include "Deck.hpp"
 #include "Card.hpp"
 
-namespace Croupier {
+namespace Croupier 
+{
 	using namespace std;
 
-	class Croupier : public Deck::Deck{
+	class Croupier : public Deck::Deck
+	{
 	private: 
 		Hand::Hand* CroupierHand;
 

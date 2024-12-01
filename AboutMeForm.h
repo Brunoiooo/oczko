@@ -9,31 +9,21 @@ namespace oczko {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for AboutMeFormh
-	/// </summary>
 	public ref class AboutMeForm : public System::Windows::Forms::Form
 	{
 	public:
 		AboutMeForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~AboutMeForm()
 		{
 			if (components)
-			{
 				delete components;
-			}
 		}
+
 	private: System::Windows::Forms::PictureBox^ pictureBox;
 	private: System::Windows::Forms::Label^ name_label;
 	private: System::Windows::Forms::Label^ direction_label;
@@ -42,20 +32,10 @@ namespace oczko {
 	private: System::Windows::Forms::Label^ year_label;
 	private: System::Windows::Forms::Label^ place_label;
 	private: System::Windows::Forms::Label^ close_label;
-
-	protected:
-
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+	private: System::ComponentModel::Container ^components;
+	private: System::Void AboutMeForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AboutMeForm::typeid));
@@ -164,6 +144,5 @@ namespace oczko {
 
 		}
 #pragma endregion
-private: System::Void AboutMeForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
 };
 }

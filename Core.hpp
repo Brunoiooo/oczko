@@ -4,10 +4,12 @@
 #include "Croupier.hpp"
 #include "Bet.hpp"
 
-namespace Core {
+namespace Core 
+{
 	using namespace std;
 
-	class Core {
+	class Core 
+	{
 	private:
 		Player::Player* Player;
 		Croupier::Croupier* Croupier;

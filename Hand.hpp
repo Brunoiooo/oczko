@@ -4,10 +4,12 @@
 
 #include <vector>
 
-namespace Hand {
+namespace Hand 
+{
 	using namespace std;
 
-	class Hand {
+	class Hand 
+	{
 	private:
 		vector<Card::Card*>* Cards;
 		bool CanAdd();
