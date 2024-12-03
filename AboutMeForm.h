@@ -100,9 +100,9 @@ namespace oczko {
 			this->year_label->AutoSize = true;
 			this->year_label->Location = System::Drawing::Point(12, 229);
 			this->year_label->Name = L"year_label";
-			this->year_label->Size = System::Drawing::Size(42, 16);
+			this->year_label->Size = System::Drawing::Size(81, 16);
 			this->year_label->TabIndex = 5;
-			this->year_label->Text = L"Rok 2";
+			this->year_label->Text = L"Rok 2024/25";
 			// 
 			// place_label
 			// 
