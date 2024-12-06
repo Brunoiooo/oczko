@@ -3,7 +3,10 @@
 namespace Croupier {
 	Croupier::~Croupier()
 	{
-		delete CroupierHand;
+		if(CroupierHand)
+			delete CroupierHand;
+
+		delete Deck;
 	}
 	Hand::Hand* Croupier::GetCroupierHand()
 	{
@@ -11,16 +14,16 @@ namespace Croupier {
 	}
 	Hand::Hand* Croupier::Croupier::NewGame()
 	{
-		ResetDeck();
+		Deck->ResetDeck();
 
 		vector<Card::Card*>* croupierCards = new vector<Card::Card*>();
-		croupierCards->push_back(DrawCard());
-		croupierCards->push_back(DrawCard());
+		croupierCards->push_back(Deck->DrawCard());
+		croupierCards->push_back(Deck->DrawCard());
 		CroupierHand = new Hand::Hand(croupierCards);
 
 		vector<Card::Card*>* playerCards = new vector<Card::Card*>();
-		playerCards->push_back(DrawCard());
-		playerCards->push_back(DrawCard());
+		playerCards->push_back(Deck->DrawCard());
+		playerCards->push_back(Deck->DrawCard());
 
 		return new Hand::Hand(playerCards);
 	}
@@ -30,6 +33,10 @@ namespace Croupier {
 			throw new runtime_error("Game has not been started!");
 
 		while (CroupierHand->GetScore() < 17)
-			CroupierHand->AddCard(DrawCard());
+			CroupierHand->AddCard(Deck->DrawCard());
+	}
+	Card::Card* Croupier::DrawCard()
+	{
+		return Deck->DrawCard();
 	}
 }

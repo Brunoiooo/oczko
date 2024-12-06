@@ -27,7 +27,6 @@ namespace Deck
 
 		void ResetDeck();
 
-	protected:
 		~Deck();
 	};
 }

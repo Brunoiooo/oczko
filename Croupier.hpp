@@ -8,16 +8,18 @@ namespace Croupier
 {
 	using namespace std;
 
-	class Croupier : public Deck::Deck
+	class Croupier
 	{
 	private: 
 		Hand::Hand* CroupierHand;
+		Deck::Deck* Deck;
 
 	public:
-		Croupier() : Deck::Deck(), CroupierHand(nullptr) {}
+		Croupier() : CroupierHand(nullptr), Deck(new Deck::Deck()) {}
 		~Croupier();
 		Hand::Hand* GetCroupierHand();
 		Hand::Hand* NewGame();
 		void FillCroupierHand();
+		Card::Card* DrawCard();
 	};
 }
