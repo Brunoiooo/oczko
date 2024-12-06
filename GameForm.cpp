@@ -18,6 +18,7 @@ namespace oczko {
 		UpdateBaseBetLabel();
 		UpdatePlayerHandScore();
 		UpdateCroupierHandScore();
+		UpdatePlayerNameLabel();
 	}
 	void GameForm::UpdateStartBetButton()
 	{
@@ -137,6 +138,10 @@ namespace oczko {
 			croupier_hand_score_label->Text = "Score: " + (core->GetPlayer()->GetBets()->at(player_bets_listbox->SelectedIndex)->GetCroupierHand()->GetScore()).ToString();
 		else if (player_hands_listbox->SelectedIndex >= 0)
 			croupier_hand_score_label->Text = "Score: " + (core->GetBets()->at(player_hands_listbox->SelectedIndex)->GetCroupierHand()->GetCards()->at(0)->GetValue()).ToString();
+	}
+	void GameForm::UpdatePlayerNameLabel()
+	{
+		Player_name_label->Text = msclr::interop::marshal_as<String^>(core->GetPlayer()->GetName());
 	}
 	System::Void GameForm::start_bet_button_Click(System::Object^ sender, System::EventArgs^ e)
 	{

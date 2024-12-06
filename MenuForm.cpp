@@ -11,8 +11,11 @@ namespace oczko {
 			if (startMoney <= 0) 
 				throw gcnew System::Exception("Start money has to be bigger than 0.");
 
+			if (player_name_textbox->Text->Length < 1)
+				throw gcnew System::Exception("Player name can't be empty.");
+
 			Hide();
-			GameForm^ gameForm = gcnew GameForm(startMoney);
+			GameForm^ gameForm = gcnew GameForm(startMoney, player_name_textbox->Text);
 			gameForm->Show();
 		}
 		catch (System::Exception^ e) {

@@ -33,6 +33,8 @@ namespace oczko {
 	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ aboutMeToolStripMenuItem;
+	private: System::Windows::Forms::TextBox^ player_name_textbox;
+	private: System::Windows::Forms::Label^ player_name_label;
 	private: System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
@@ -46,6 +48,8 @@ namespace oczko {
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutMeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->player_name_textbox = (gcnew System::Windows::Forms::TextBox());
+			this->player_name_label = (gcnew System::Windows::Forms::Label());
 			this->menu_strip->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -107,9 +111,26 @@ namespace oczko {
 			// aboutMeToolStripMenuItem
 			// 
 			this->aboutMeToolStripMenuItem->Name = L"aboutMeToolStripMenuItem";
-			this->aboutMeToolStripMenuItem->Size = System::Drawing::Size(224, 30);
+			this->aboutMeToolStripMenuItem->Size = System::Drawing::Size(177, 30);
 			this->aboutMeToolStripMenuItem->Text = L"About me";
 			this->aboutMeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MenuForm::aboutMeToolStripMenuItem_Click);
+			// 
+			// player_name_textbox
+			// 
+			this->player_name_textbox->Location = System::Drawing::Point(723, 253);
+			this->player_name_textbox->Name = L"player_name_textbox";
+			this->player_name_textbox->Size = System::Drawing::Size(216, 22);
+			this->player_name_textbox->TabIndex = 4;
+			this->player_name_textbox->Text = L"Player";
+			// 
+			// player_name_label
+			// 
+			this->player_name_label->AutoSize = true;
+			this->player_name_label->Location = System::Drawing::Point(720, 234);
+			this->player_name_label->Name = L"player_name_label";
+			this->player_name_label->Size = System::Drawing::Size(83, 16);
+			this->player_name_label->TabIndex = 5;
+			this->player_name_label->Text = L"Player name";
 			// 
 			// MenuForm
 			// 
@@ -117,6 +138,8 @@ namespace oczko {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(1742, 833);
+			this->Controls->Add(this->player_name_label);
+			this->Controls->Add(this->player_name_textbox);
 			this->Controls->Add(this->start_money_label);
 			this->Controls->Add(this->StartMoneyTextBox);
 			this->Controls->Add(this->StartButton);

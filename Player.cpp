@@ -39,6 +39,10 @@ namespace Player {
 		Money += bet->GetPay();
 		Bets->push_back(bet);
 	}
+	string Player::GetName()
+	{
+		return Name;
+	}
 	Player::~Player()
 	{
 		for (Bet::Bet* bet : *Bets)

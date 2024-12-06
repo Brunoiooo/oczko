@@ -4,6 +4,8 @@
 #include "Bet.hpp"
 #include "Card.hpp"
 #include "AboutMeForm.h"
+#include <msclr/marshal_cppstd.h>
+#include <string>
 
 namespace oczko {
 
@@ -37,11 +39,12 @@ namespace oczko {
 		void UpdateBaseBetLabel();
 		void UpdatePlayerHandScore();
 		void UpdateCroupierHandScore();
+		void UpdatePlayerNameLabel();
 
 	public:
-		GameForm(float money)
+		GameForm(float money, String^ name)
 		{
-			core = new Core::Core(money);
+			core = new Core::Core(money, msclr::interop::marshal_as<string>(name));
 
 			InitializeComponent();
 
@@ -84,6 +87,7 @@ namespace oczko {
 	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ aboutMeToolStripMenuItem;
+	private: System::Windows::Forms::Label^ Player_name_label;
 	private: System::ComponentModel::IContainer^ components;
 
 #pragma region Windows Form Designer generated code
@@ -115,6 +119,7 @@ namespace oczko {
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutMeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->Player_name_label = (gcnew System::Windows::Forms::Label());
 			this->menu_strip->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -331,9 +336,17 @@ namespace oczko {
 			// aboutMeToolStripMenuItem
 			// 
 			this->aboutMeToolStripMenuItem->Name = L"aboutMeToolStripMenuItem";
-			this->aboutMeToolStripMenuItem->Size = System::Drawing::Size(224, 30);
+			this->aboutMeToolStripMenuItem->Size = System::Drawing::Size(177, 30);
 			this->aboutMeToolStripMenuItem->Text = L"About me";
 			this->aboutMeToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::aboutMeToolStripMenuItem_Click);
+			// 
+			// label1
+			// 
+			this->Player_name_label->AutoSize = true;
+			this->Player_name_label->Location = System::Drawing::Point(1491, 127);
+			this->Player_name_label->Name = L"Player_name_label";
+			this->Player_name_label->Size = System::Drawing::Size(0, 16);
+			this->Player_name_label->TabIndex = 21;
 			// 
 			// GameForm
 			// 
@@ -341,6 +354,7 @@ namespace oczko {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(1787, 777);
+			this->Controls->Add(this->Player_name_label);
 			this->Controls->Add(this->menu_strip);
 			this->Controls->Add(this->player_hand_score_label);
 			this->Controls->Add(this->croupier_hand_score_label);

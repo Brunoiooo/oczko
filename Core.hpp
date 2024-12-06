@@ -3,6 +3,7 @@
 #include "Player.hpp"
 #include "Croupier.hpp"
 #include "Bet.hpp"
+#include <string>
 
 namespace Core 
 {
@@ -20,8 +21,8 @@ namespace Core
 			Player(new Player::Player()), 
 			Croupier(new Croupier::Croupier()), 
 			Bets(new vector<Bet::Bet*>()) {}
-		Core(float money) : 
-			Player(new Player::Player(money)), 
+		Core(float money, string name) :
+			Player(new Player::Player(money, name)), 
 			Croupier(new Croupier::Croupier()), 
 			Bets(new vector<Bet::Bet*>()) {}
 
