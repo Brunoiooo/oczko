@@ -346,4 +346,14 @@ namespace oczko {
 			MessageBox::Show(e->Message);
 		}
 	}
+	System::Void GameForm::exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		Application::Exit();
+	}
+	System::Void GameForm::aboutMeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		AboutMeForm^ aboutMeForm = gcnew AboutMeForm();
+
+		aboutMeForm->ShowDialog();
+	}
 }
