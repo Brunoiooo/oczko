@@ -83,11 +83,15 @@ namespace oczko {
 	private: System::Windows::Forms::Label^ base_bet_label;
 	private: System::Windows::Forms::Label^ croupier_hand_score_label;
 	private: System::Windows::Forms::Label^ player_hand_score_label;
-	private: System::Windows::Forms::MenuStrip^ menu_strip;
+
+
+
+
+	private: System::Windows::Forms::Label^ Player_name_label;
 	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ aboutMeToolStripMenuItem;
-	private: System::Windows::Forms::Label^ Player_name_label;
+	private: System::Windows::Forms::MenuStrip^ menu_strip;
 	private: System::ComponentModel::IContainer^ components;
 
 #pragma region Windows Form Designer generated code
@@ -115,11 +119,11 @@ namespace oczko {
 			this->base_bet_label = (gcnew System::Windows::Forms::Label());
 			this->croupier_hand_score_label = (gcnew System::Windows::Forms::Label());
 			this->player_hand_score_label = (gcnew System::Windows::Forms::Label());
-			this->menu_strip = (gcnew System::Windows::Forms::MenuStrip());
+			this->Player_name_label = (gcnew System::Windows::Forms::Label());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutMeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->Player_name_label = (gcnew System::Windows::Forms::Label());
+			this->menu_strip = (gcnew System::Windows::Forms::MenuStrip());
 			this->menu_strip->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -152,16 +156,17 @@ namespace oczko {
 			// player_wallet_label
 			// 
 			this->player_wallet_label->AutoSize = true;
-			this->player_wallet_label->Location = System::Drawing::Point(12, 9);
+			this->player_wallet_label->Location = System::Drawing::Point(9, 40);
 			this->player_wallet_label->Name = L"player_wallet_label";
-			this->player_wallet_label->Size = System::Drawing::Size(0, 16);
+			this->player_wallet_label->Size = System::Drawing::Size(123, 16);
 			this->player_wallet_label->TabIndex = 3;
+			this->player_wallet_label->Text = L"player_wallet_label";
 			// 
 			// player_bets_listbox
 			// 
 			this->player_bets_listbox->FormattingEnabled = true;
 			this->player_bets_listbox->ItemHeight = 16;
-			this->player_bets_listbox->Location = System::Drawing::Point(12, 40);
+			this->player_bets_listbox->Location = System::Drawing::Point(12, 153);
 			this->player_bets_listbox->Name = L"player_bets_listbox";
 			this->player_bets_listbox->Size = System::Drawing::Size(120, 84);
 			this->player_bets_listbox->TabIndex = 5;
@@ -275,7 +280,7 @@ namespace oczko {
 			// player_bets_label
 			// 
 			this->player_bets_label->AutoSize = true;
-			this->player_bets_label->Location = System::Drawing::Point(12, 21);
+			this->player_bets_label->Location = System::Drawing::Point(12, 134);
 			this->player_bets_label->Name = L"player_bets_label";
 			this->player_bets_label->Size = System::Drawing::Size(75, 16);
 			this->player_bets_label->TabIndex = 16;
@@ -286,36 +291,36 @@ namespace oczko {
 			this->base_bet_label->AutoSize = true;
 			this->base_bet_label->Location = System::Drawing::Point(1485, 127);
 			this->base_bet_label->Name = L"base_bet_label";
-			this->base_bet_label->Size = System::Drawing::Size(0, 16);
+			this->base_bet_label->Size = System::Drawing::Size(101, 16);
 			this->base_bet_label->TabIndex = 17;
+			this->base_bet_label->Text = L"base_bet_label";
 			// 
 			// croupier_hand_score_label
 			// 
 			this->croupier_hand_score_label->AutoSize = true;
-			this->croupier_hand_score_label->Location = System::Drawing::Point(912, 463);
+			this->croupier_hand_score_label->Location = System::Drawing::Point(912, 464);
 			this->croupier_hand_score_label->Name = L"croupier_hand_score_label";
-			this->croupier_hand_score_label->Size = System::Drawing::Size(0, 16);
+			this->croupier_hand_score_label->Size = System::Drawing::Size(171, 16);
 			this->croupier_hand_score_label->TabIndex = 18;
+			this->croupier_hand_score_label->Text = L"croupier_hand_score_label";
 			// 
 			// player_hand_score_label
 			// 
 			this->player_hand_score_label->AutoSize = true;
 			this->player_hand_score_label->Location = System::Drawing::Point(339, 463);
 			this->player_hand_score_label->Name = L"player_hand_score_label";
-			this->player_hand_score_label->Size = System::Drawing::Size(0, 16);
+			this->player_hand_score_label->Size = System::Drawing::Size(160, 16);
 			this->player_hand_score_label->TabIndex = 19;
+			this->player_hand_score_label->Text = L"player_hand_score_label";
 			// 
-			// menu_strip
+			// Player_name_label
 			// 
-			this->menu_strip->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->menu_strip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->exitToolStripMenuItem,
-					this->helpToolStripMenuItem
-			});
-			this->menu_strip->Location = System::Drawing::Point(0, 0);
-			this->menu_strip->Name = L"menu_strip";
-			this->menu_strip->Size = System::Drawing::Size(1787, 34);
-			this->menu_strip->TabIndex = 20;
+			this->Player_name_label->AutoSize = true;
+			this->Player_name_label->Location = System::Drawing::Point(1485, 21);
+			this->Player_name_label->Name = L"Player_name_label";
+			this->Player_name_label->Size = System::Drawing::Size(124, 16);
+			this->Player_name_label->TabIndex = 21;
+			this->Player_name_label->Text = L"Player_name_label";
 			// 
 			// exitToolStripMenuItem
 			// 
@@ -340,13 +345,17 @@ namespace oczko {
 			this->aboutMeToolStripMenuItem->Text = L"About me";
 			this->aboutMeToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::aboutMeToolStripMenuItem_Click);
 			// 
-			// label1
+			// menu_strip
 			// 
-			this->Player_name_label->AutoSize = true;
-			this->Player_name_label->Location = System::Drawing::Point(1491, 127);
-			this->Player_name_label->Name = L"Player_name_label";
-			this->Player_name_label->Size = System::Drawing::Size(0, 16);
-			this->Player_name_label->TabIndex = 21;
+			this->menu_strip->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menu_strip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->exitToolStripMenuItem,
+					this->helpToolStripMenuItem
+			});
+			this->menu_strip->Location = System::Drawing::Point(0, 0);
+			this->menu_strip->Name = L"menu_strip";
+			this->menu_strip->Size = System::Drawing::Size(1787, 34);
+			this->menu_strip->TabIndex = 20;
 			// 
 			// GameForm
 			// 

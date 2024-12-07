@@ -18,7 +18,10 @@ namespace Core {
 		if (!CanNewBet(baseBet))
 			throw new runtime_error("New game can't be started!");
 
-		Bets->push_back(new Bet::Bet(baseBet, Croupier->NewGame(), Croupier->GetCroupierHand()));
+		Hand::Hand* playerHand = Croupier->NewGame();
+		Player->AddHand(playerHand);
+
+		Bets->push_back(new Bet::Bet(baseBet, playerHand, Croupier->GetCroupierHand()));
 		Player->Withdrawal(baseBet);
 	}
 	bool Core::CanNewBet(float baseBet)
@@ -73,6 +76,7 @@ namespace Core {
 			Player->GiveBet(bet);
 
 		Bets->clear();
+		Player->ClearHands();
 	}
 	Core::~Core()
 	{

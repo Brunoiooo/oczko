@@ -21,10 +21,11 @@ namespace Player
 		float Money;
 		string Name;
 		vector<Bet::Bet*>* Bets;
+		vector<Hand::Hand*>* Hands;
 
 	public:
-		Player() : Name("Player"), Money(0), Bets(new vector<Bet::Bet*>()) {}
-		Player(float money, string name) : Name(name), Money(money), Bets(new vector<Bet::Bet*>())
+		Player() : Name("Player"), Money(0), Bets(new vector<Bet::Bet*>()), Hands(new vector<Hand::Hand*>()) {}
+		Player(float money, string name) : Name(name), Money(money), Bets(new vector<Bet::Bet*>()), Hands(new vector<Hand::Hand*>())
 		{
 			if (money < 0) 
 				throw new runtime_error("Money can't be less than 0!");
@@ -34,7 +35,6 @@ namespace Player
 		}
 
 		float GetMoney();
-
 		vector<Bet::Bet*>* GetBets();
 
 		void Deposite(float deposite);
@@ -46,6 +46,9 @@ namespace Player
 		void GiveBet(Bet::Bet* bet);
 
 		string GetName();
+
+		void AddHand(Hand::Hand* hand);
+		void ClearHands();
 
 		~Player();
 	};

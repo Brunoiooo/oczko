@@ -59,7 +59,11 @@ namespace Bet {
 		if (!CanSplit(player))
 			throw new runtime_error("Split can't be used!");
 
-		Bet* bet = new Bet(BaseBet, PlayerHand->Split(), CroupierHand, true);
+		Hand::Hand* newPlayerHand = PlayerHand->Split();
+
+		player->AddHand(newPlayerHand);
+
+		Bet* bet = new Bet(BaseBet, newPlayerHand, CroupierHand, true);
 
 		player->Withdrawal(BaseBet);
 		IsSplited = true;

@@ -243,6 +243,8 @@ namespace oczko {
 
 			UpdatePlayerHandScore();
 			UpdateCroupierHandScore();
+
+			UpdatePlayerWalletLabel();
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);
@@ -272,6 +274,8 @@ namespace oczko {
 
 			UpdatePlayerHandScore();
 			UpdateCroupierHandScore();
+
+			UpdatePlayerWalletLabel();
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);
@@ -301,6 +305,8 @@ namespace oczko {
 
 			UpdatePlayerHandScore();
 			UpdateCroupierHandScore();
+
+			UpdatePlayerWalletLabel();
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);
@@ -330,6 +336,8 @@ namespace oczko {
 
 			UpdatePlayerHandScore();
 			UpdateCroupierHandScore();
+
+			UpdatePlayerWalletLabel();
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);

@@ -43,11 +43,22 @@ namespace Player {
 	{
 		return Name;
 	}
+	void Player::AddHand(Hand::Hand* hand)
+	{
+		Hands->push_back(hand);
+	}
+	void Player::ClearHands()
+	{
+		Hands->clear();
+	}
 	Player::~Player()
 	{
 		for (Bet::Bet* bet : *Bets)
 			delete bet;
-
 		delete Bets;
+
+		for (Hand::Hand* hand : *Hands)
+			delete hand;
+		delete Hands;
 	}
 }
