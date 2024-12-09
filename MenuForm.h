@@ -55,9 +55,9 @@ namespace oczko {
 			// 
 			// StartButton
 			// 
-			this->StartButton->Location = System::Drawing::Point(723, 577);
+			this->StartButton->Location = System::Drawing::Point(534, 359);
 			this->StartButton->Name = L"StartButton";
-			this->StartButton->Size = System::Drawing::Size(240, 101);
+			this->StartButton->Size = System::Drawing::Size(824, 485);
 			this->StartButton->TabIndex = 0;
 			this->StartButton->Text = L"Start";
 			this->StartButton->UseVisualStyleBackColor = true;
@@ -67,7 +67,7 @@ namespace oczko {
 			// 
 			this->StartMoneyTextBox->Location = System::Drawing::Point(723, 209);
 			this->StartMoneyTextBox->Name = L"StartMoneyTextBox";
-			this->StartMoneyTextBox->Size = System::Drawing::Size(216, 22);
+			this->StartMoneyTextBox->Size = System::Drawing::Size(303, 22);
 			this->StartMoneyTextBox->TabIndex = 1;
 			this->StartMoneyTextBox->Text = L"1000";
 			// 
@@ -89,7 +89,7 @@ namespace oczko {
 			});
 			this->menu_strip->Location = System::Drawing::Point(0, 0);
 			this->menu_strip->Name = L"menu_strip";
-			this->menu_strip->Size = System::Drawing::Size(1742, 34);
+			this->menu_strip->Size = System::Drawing::Size(1902, 34);
 			this->menu_strip->TabIndex = 3;
 			// 
 			// exitToolStripMenuItem
@@ -119,7 +119,7 @@ namespace oczko {
 			// 
 			this->player_name_textbox->Location = System::Drawing::Point(723, 253);
 			this->player_name_textbox->Name = L"player_name_textbox";
-			this->player_name_textbox->Size = System::Drawing::Size(216, 22);
+			this->player_name_textbox->Size = System::Drawing::Size(303, 22);
 			this->player_name_textbox->TabIndex = 4;
 			this->player_name_textbox->Text = L"Player";
 			// 
@@ -137,7 +137,7 @@ namespace oczko {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::WindowFrame;
-			this->ClientSize = System::Drawing::Size(1742, 833);
+			this->ClientSize = System::Drawing::Size(1902, 1033);
 			this->Controls->Add(this->player_name_label);
 			this->Controls->Add(this->player_name_textbox);
 			this->Controls->Add(this->start_money_label);
