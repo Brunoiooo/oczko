@@ -316,7 +316,7 @@ namespace oczko {
 			// Player_name_label
 			// 
 			this->Player_name_label->AutoSize = true;
-			this->Player_name_label->Location = System::Drawing::Point(1485, 440);
+			this->Player_name_label->Location = System::Drawing::Point(784, 360);
 			this->Player_name_label->Name = L"Player_name_label";
 			this->Player_name_label->Size = System::Drawing::Size(124, 16);
 			this->Player_name_label->TabIndex = 21;
