@@ -143,6 +143,16 @@ namespace oczko {
 	{
 		Player_name_label->Text = msclr::interop::marshal_as<String^>(core->GetPlayer()->GetName());
 	}
+	void GameForm::ShowBetState(Bet::Bet* bet)
+	{
+		if (bet->IsStop())
+			if (bet->IsDraw())
+				MessageBox::Show("Draw");
+			else if (bet->IsLost())
+				MessageBox::Show("Lost -" + bet->GetBaseBet());
+			else if (bet->IsWin())
+				MessageBox::Show("Win +" + bet->GetBaseBet());
+	}
 	System::Void GameForm::start_bet_button_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		try {
@@ -222,7 +232,8 @@ namespace oczko {
 	System::Void GameForm::hit_button_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		try {
-			core->Hit(core->GetBets()->at(player_hands_listbox->SelectedIndex));
+			Bet::Bet* bet = core->GetBets()->at(player_hands_listbox->SelectedIndex);
+			core->Hit(bet);
 
 			UpdatePlayerBetsListbox();
 			UpdatePlayerHandsListbox(core->GetBets()->size() > 0 ? false : true);
@@ -245,6 +256,8 @@ namespace oczko {
 			UpdateCroupierHandScore();
 
 			UpdatePlayerWalletLabel();
+
+			ShowBetState(bet);
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);
@@ -253,7 +266,8 @@ namespace oczko {
 	System::Void GameForm::stand_button_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		try {
-			core->Stand(core->GetBets()->at(player_hands_listbox->SelectedIndex));
+			Bet::Bet* bet = core->GetBets()->at(player_hands_listbox->SelectedIndex);
+			core->Stand(bet);
 
 			UpdatePlayerBetsListbox();
 			UpdatePlayerHandsListbox(true);
@@ -276,6 +290,7 @@ namespace oczko {
 			UpdateCroupierHandScore();
 
 			UpdatePlayerWalletLabel();
+			ShowBetState(bet);
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);
@@ -284,7 +299,8 @@ namespace oczko {
 	System::Void GameForm::double_button_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		try {
-			core->Double(core->GetBets()->at(player_hands_listbox->SelectedIndex));
+			Bet::Bet* bet = core->GetBets()->at(player_hands_listbox->SelectedIndex);
+			core->Double(bet);
 
 			UpdatePlayerBetsListbox();
 			UpdatePlayerHandsListbox(true);
@@ -307,6 +323,8 @@ namespace oczko {
 			UpdateCroupierHandScore();
 
 			UpdatePlayerWalletLabel();
+		
+			ShowBetState(bet);
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);
@@ -315,7 +333,8 @@ namespace oczko {
 	System::Void GameForm::split_button_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		try {
-			core->Split(core->GetBets()->at(player_hands_listbox->SelectedIndex));
+			Bet::Bet* bet = core->GetBets()->at(player_hands_listbox->SelectedIndex);
+			core->Split(bet);
 
 			UpdatePlayerBetsListbox();
 			UpdatePlayerHandsListbox(true);
@@ -338,6 +357,8 @@ namespace oczko {
 			UpdateCroupierHandScore();
 
 			UpdatePlayerWalletLabel();
+		
+			ShowBetState(bet);
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);

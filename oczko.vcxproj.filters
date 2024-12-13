@@ -37,11 +37,11 @@
     <Filter Include="Game\Bet">
       <UniqueIdentifier>{67f7e266-d7a5-4442-9979-a2e934be757d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Core">
-      <UniqueIdentifier>{ada7b082-d961-45ba-9675-ca6cd4eafa05}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki zasobów\cards">
       <UniqueIdentifier>{3a75dd22-d0cb-4d2e-a34b-010591bb6298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Core">
+      <UniqueIdentifier>{ada7b082-d961-45ba-9675-ca6cd4eafa05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -40,6 +40,7 @@ namespace oczko {
 		void UpdatePlayerHandScore();
 		void UpdateCroupierHandScore();
 		void UpdatePlayerNameLabel();
+		void ShowBetState(Bet::Bet* bet);
 
 	public:
 		GameForm(float money, String^ name)
