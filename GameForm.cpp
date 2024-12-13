@@ -166,6 +166,8 @@ namespace oczko {
 			core->NewBet(money);
 
 			UpdateEverything(true);
+
+			player_hands_listbox->SelectedIndex = 0;
 		}
 		catch (Exception^ e) {
 			MessageBox::Show(e->Message);

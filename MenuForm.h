@@ -74,6 +74,7 @@ namespace oczko {
 			// start_money_label
 			// 
 			this->start_money_label->AutoSize = true;
+			this->start_money_label->ForeColor = System::Drawing::SystemColors::Info;
 			this->start_money_label->Location = System::Drawing::Point(720, 190);
 			this->start_money_label->Name = L"start_money_label";
 			this->start_money_label->Size = System::Drawing::Size(78, 16);
@@ -126,6 +127,7 @@ namespace oczko {
 			// player_name_label
 			// 
 			this->player_name_label->AutoSize = true;
+			this->player_name_label->ForeColor = System::Drawing::SystemColors::Info;
 			this->player_name_label->Location = System::Drawing::Point(720, 234);
 			this->player_name_label->Name = L"player_name_label";
 			this->player_name_label->Size = System::Drawing::Size(83, 16);

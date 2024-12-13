@@ -130,7 +130,7 @@ namespace oczko {
 			// 
 			// start_bet_button
 			// 
-			this->start_bet_button->Location = System::Drawing::Point(693, 813);
+			this->start_bet_button->Location = System::Drawing::Point(698, 845);
 			this->start_bet_button->Name = L"start_bet_button";
 			this->start_bet_button->Size = System::Drawing::Size(410, 140);
 			this->start_bet_button->TabIndex = 0;
@@ -140,7 +140,7 @@ namespace oczko {
 			// 
 			// start_bet_textbox
 			// 
-			this->start_bet_textbox->Location = System::Drawing::Point(693, 785);
+			this->start_bet_textbox->Location = System::Drawing::Point(698, 817);
 			this->start_bet_textbox->Name = L"start_bet_textbox";
 			this->start_bet_textbox->Size = System::Drawing::Size(410, 22);
 			this->start_bet_textbox->TabIndex = 1;
@@ -148,7 +148,8 @@ namespace oczko {
 			// start_bet_label
 			// 
 			this->start_bet_label->AutoSize = true;
-			this->start_bet_label->Location = System::Drawing::Point(690, 766);
+			this->start_bet_label->ForeColor = System::Drawing::SystemColors::Info;
+			this->start_bet_label->Location = System::Drawing::Point(695, 798);
 			this->start_bet_label->Name = L"start_bet_label";
 			this->start_bet_label->Size = System::Drawing::Size(105, 16);
 			this->start_bet_label->TabIndex = 2;
@@ -157,6 +158,7 @@ namespace oczko {
 			// player_wallet_label
 			// 
 			this->player_wallet_label->AutoSize = true;
+			this->player_wallet_label->ForeColor = System::Drawing::SystemColors::Info;
 			this->player_wallet_label->Location = System::Drawing::Point(9, 40);
 			this->player_wallet_label->Name = L"player_wallet_label";
 			this->player_wallet_label->Size = System::Drawing::Size(123, 16);
@@ -169,7 +171,7 @@ namespace oczko {
 			this->player_bets_listbox->ItemHeight = 16;
 			this->player_bets_listbox->Location = System::Drawing::Point(12, 105);
 			this->player_bets_listbox->Name = L"player_bets_listbox";
-			this->player_bets_listbox->Size = System::Drawing::Size(261, 804);
+			this->player_bets_listbox->Size = System::Drawing::Size(261, 580);
 			this->player_bets_listbox->TabIndex = 5;
 			this->player_bets_listbox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::player_bets_listbox_SelectedIndexChanged);
 			// 
@@ -177,9 +179,9 @@ namespace oczko {
 			// 
 			this->player_hands_listbox->FormattingEnabled = true;
 			this->player_hands_listbox->ItemHeight = 16;
-			this->player_hands_listbox->Location = System::Drawing::Point(1488, 459);
+			this->player_hands_listbox->Location = System::Drawing::Point(1485, 106);
 			this->player_hands_listbox->Name = L"player_hands_listbox";
-			this->player_hands_listbox->Size = System::Drawing::Size(402, 196);
+			this->player_hands_listbox->Size = System::Drawing::Size(402, 580);
 			this->player_hands_listbox->TabIndex = 6;
 			this->player_hands_listbox->SelectedIndexChanged += gcnew System::EventHandler(this, &GameForm::player_hands_listbox_SelectedIndexChanged);
 			// 
@@ -192,7 +194,7 @@ namespace oczko {
 			// player_hand_listview
 			// 
 			this->player_hand_listview->HideSelection = false;
-			this->player_hand_listview->Location = System::Drawing::Point(279, 379);
+			this->player_hand_listview->Location = System::Drawing::Point(276, 409);
 			this->player_hand_listview->Name = L"player_hand_listview";
 			this->player_hand_listview->OwnerDraw = true;
 			this->player_hand_listview->Size = System::Drawing::Size(1203, 276);
@@ -202,7 +204,7 @@ namespace oczko {
 			// 
 			// hit_button
 			// 
-			this->hit_button->Location = System::Drawing::Point(542, 683);
+			this->hit_button->Location = System::Drawing::Point(276, 691);
 			this->hit_button->Name = L"hit_button";
 			this->hit_button->Size = System::Drawing::Size(171, 67);
 			this->hit_button->TabIndex = 8;
@@ -212,7 +214,7 @@ namespace oczko {
 			// 
 			// stand_button
 			// 
-			this->stand_button->Location = System::Drawing::Point(719, 683);
+			this->stand_button->Location = System::Drawing::Point(646, 691);
 			this->stand_button->Name = L"stand_button";
 			this->stand_button->Size = System::Drawing::Size(171, 67);
 			this->stand_button->TabIndex = 9;
@@ -222,7 +224,7 @@ namespace oczko {
 			// 
 			// double_button
 			// 
-			this->double_button->Location = System::Drawing::Point(896, 683);
+			this->double_button->Location = System::Drawing::Point(984, 691);
 			this->double_button->Name = L"double_button";
 			this->double_button->Size = System::Drawing::Size(171, 67);
 			this->double_button->TabIndex = 10;
@@ -232,7 +234,7 @@ namespace oczko {
 			// 
 			// split_button
 			// 
-			this->split_button->Location = System::Drawing::Point(1073, 683);
+			this->split_button->Location = System::Drawing::Point(1311, 691);
 			this->split_button->Name = L"split_button";
 			this->split_button->Size = System::Drawing::Size(171, 67);
 			this->split_button->TabIndex = 11;
@@ -243,7 +245,7 @@ namespace oczko {
 			// croupier_hand_listview
 			// 
 			this->croupier_hand_listview->HideSelection = false;
-			this->croupier_hand_listview->Location = System::Drawing::Point(279, 76);
+			this->croupier_hand_listview->Location = System::Drawing::Point(276, 106);
 			this->croupier_hand_listview->Name = L"croupier_hand_listview";
 			this->croupier_hand_listview->OwnerDraw = true;
 			this->croupier_hand_listview->Size = System::Drawing::Size(1203, 276);
@@ -254,7 +256,8 @@ namespace oczko {
 			// player_hand_label
 			// 
 			this->player_hand_label->AutoSize = true;
-			this->player_hand_label->Location = System::Drawing::Point(339, 21);
+			this->player_hand_label->ForeColor = System::Drawing::SystemColors::Info;
+			this->player_hand_label->Location = System::Drawing::Point(1397, 392);
 			this->player_hand_label->Name = L"player_hand_label";
 			this->player_hand_label->Size = System::Drawing::Size(79, 16);
 			this->player_hand_label->TabIndex = 13;
@@ -263,7 +266,8 @@ namespace oczko {
 			// croupier_hand_label
 			// 
 			this->croupier_hand_label->AutoSize = true;
-			this->croupier_hand_label->Location = System::Drawing::Point(912, 21);
+			this->croupier_hand_label->ForeColor = System::Drawing::SystemColors::Info;
+			this->croupier_hand_label->Location = System::Drawing::Point(273, 87);
 			this->croupier_hand_label->Name = L"croupier_hand_label";
 			this->croupier_hand_label->Size = System::Drawing::Size(91, 16);
 			this->croupier_hand_label->TabIndex = 14;
@@ -272,7 +276,8 @@ namespace oczko {
 			// player_hands_label
 			// 
 			this->player_hands_label->AutoSize = true;
-			this->player_hands_label->Location = System::Drawing::Point(1485, 440);
+			this->player_hands_label->ForeColor = System::Drawing::SystemColors::Info;
+			this->player_hands_label->Location = System::Drawing::Point(1482, 87);
 			this->player_hands_label->Name = L"player_hands_label";
 			this->player_hands_label->Size = System::Drawing::Size(81, 16);
 			this->player_hands_label->TabIndex = 15;
@@ -281,6 +286,7 @@ namespace oczko {
 			// player_bets_label
 			// 
 			this->player_bets_label->AutoSize = true;
+			this->player_bets_label->ForeColor = System::Drawing::SystemColors::Info;
 			this->player_bets_label->Location = System::Drawing::Point(12, 88);
 			this->player_bets_label->Name = L"player_bets_label";
 			this->player_bets_label->Size = System::Drawing::Size(75, 16);
@@ -290,7 +296,8 @@ namespace oczko {
 			// base_bet_label
 			// 
 			this->base_bet_label->AutoSize = true;
-			this->base_bet_label->Location = System::Drawing::Point(1485, 362);
+			this->base_bet_label->ForeColor = System::Drawing::SystemColors::Info;
+			this->base_bet_label->Location = System::Drawing::Point(1091, 390);
 			this->base_bet_label->Name = L"base_bet_label";
 			this->base_bet_label->Size = System::Drawing::Size(101, 16);
 			this->base_bet_label->TabIndex = 17;
@@ -299,7 +306,8 @@ namespace oczko {
 			// croupier_hand_score_label
 			// 
 			this->croupier_hand_score_label->AutoSize = true;
-			this->croupier_hand_score_label->Location = System::Drawing::Point(1311, 57);
+			this->croupier_hand_score_label->ForeColor = System::Drawing::SystemColors::Info;
+			this->croupier_hand_score_label->Location = System::Drawing::Point(1308, 87);
 			this->croupier_hand_score_label->Name = L"croupier_hand_score_label";
 			this->croupier_hand_score_label->Size = System::Drawing::Size(171, 16);
 			this->croupier_hand_score_label->TabIndex = 18;
@@ -308,7 +316,8 @@ namespace oczko {
 			// player_hand_score_label
 			// 
 			this->player_hand_score_label->AutoSize = true;
-			this->player_hand_score_label->Location = System::Drawing::Point(276, 360);
+			this->player_hand_score_label->ForeColor = System::Drawing::SystemColors::Info;
+			this->player_hand_score_label->Location = System::Drawing::Point(273, 390);
 			this->player_hand_score_label->Name = L"player_hand_score_label";
 			this->player_hand_score_label->Size = System::Drawing::Size(160, 16);
 			this->player_hand_score_label->TabIndex = 19;
@@ -317,9 +326,12 @@ namespace oczko {
 			// Player_name_label
 			// 
 			this->Player_name_label->AutoSize = true;
-			this->Player_name_label->Location = System::Drawing::Point(784, 360);
+			this->Player_name_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->Player_name_label->ForeColor = System::Drawing::SystemColors::Info;
+			this->Player_name_label->Location = System::Drawing::Point(781, 390);
 			this->Player_name_label->Name = L"Player_name_label";
-			this->Player_name_label->Size = System::Drawing::Size(124, 16);
+			this->Player_name_label->Size = System::Drawing::Size(141, 16);
 			this->Player_name_label->TabIndex = 21;
 			this->Player_name_label->Text = L"Player_name_label";
 			// 
