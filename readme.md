@@ -4,11 +4,11 @@ Oczko is a Windows desktop card game written in C++/CLI with Windows Forms. The 
 
 ## Features
 
-- player setup with starting money and player name
-- graphical menu and game screens built with Windows Forms
-- core game actions: hit, stand, double, and split
-- betting flow with wallet tracking
-- bundled card images and application icon
+- Player setup with starting money and player name
+- Graphical menu and game screens built with Windows Forms
+- Core game actions: hit, stand, double, and split
+- Betting flow with wallet tracking
+- Bundled card images and application icon
 
 ## Tech stack
 
@@ -19,12 +19,12 @@ Oczko is a Windows desktop card game written in C++/CLI with Windows Forms. The 
 
 ## Project structure
 
-- `main.cpp` — application entry point
-- `MenuForm.h` and `MenuForm.cpp` — start screen
-- `GameForm.h` — main game UI
-- `Core.hpp` and `Core.cpp` — game orchestration
-- `cards/` — card image assets
-- `img/` — additional images
+- `main.cpp` — Application entry point
+- `MenuForm.h` and `MenuForm.cpp` — Start screen
+- `GameForm.h` — Main game UI
+- `Core.hpp` and `Core.cpp` — Game orchestration
+- `cards/` — Card image assets
+- `img/` — Additional images
 
 ## Build
 
