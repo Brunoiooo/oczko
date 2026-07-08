@@ -19,18 +19,18 @@ Oczko is a Windows desktop card game written in C++/CLI with Windows Forms. The 
 
 ## Project structure
 
-- `/home/runner/work/oczko/oczko/main.cpp` — application entry point
-- `/home/runner/work/oczko/oczko/MenuForm.h` and `/home/runner/work/oczko/oczko/MenuForm.cpp` — start screen
-- `/home/runner/work/oczko/oczko/GameForm.h` — main game UI
-- `/home/runner/work/oczko/oczko/Core.hpp` and `/home/runner/work/oczko/oczko/Core.cpp` — game orchestration
-- `/home/runner/work/oczko/oczko/cards` — card image assets
-- `/home/runner/work/oczko/oczko/img` — additional images
+- `main.cpp` — application entry point
+- `MenuForm.h` and `MenuForm.cpp` — start screen
+- `GameForm.h` — main game UI
+- `Core.hpp` and `Core.cpp` — game orchestration
+- `cards/` — card image assets
+- `img/` — additional images
 
 ## Build
 
 This repository contains a Visual Studio C++/CLI project and is intended to be built on Windows with Visual Studio and the C++/CLI toolchain installed.
 
-1. Open `/home/runner/work/oczko/oczko/oczko.sln` in Visual Studio.
+1. Open `oczko.sln` in Visual Studio.
 2. Select a build configuration such as `Debug|x64` or `Release|x64`.
 3. Build and run the `oczko` project from Visual Studio.
 
